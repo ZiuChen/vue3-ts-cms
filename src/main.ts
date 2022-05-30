@@ -5,5 +5,5 @@ import store from './store'
 import registerApp from './global'
 
 const app = createApp(App).use(router).use(store)
-registerApp(app)
+app.use(registerApp)
 app.mount('#app')
