@@ -14,5 +14,15 @@ console.log(process.env.VUE_APP_TIME_OUT)
 
 zuRequest.request({
   url: '/home/multidata',
-  method: 'GET'
+  method: 'GET',
+  interceptors: {
+    requestInterceptor: (cfg) => {
+      console.log('[局部]请求成功拦截')
+      return cfg
+    },
+    responseInterceptor: (res) => {
+      console.log('[局部]响应成功拦截')
+      return res
+    }
+  }
 })

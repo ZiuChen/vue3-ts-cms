@@ -25,10 +25,35 @@ export default class ZURequest {
       this.interceptors?.responseInterceptor,
       this.interceptors?.responseInterceptorCatch
     )
+    this.instance.interceptors.request.use(
+      (config) => {
+        console.log('[全局]请求成功拦截')
+        return config
+      },
+      (err) => {
+        console.log('[全局]请求失败拦截')
+        return err
+      }
+    )
+    this.instance.interceptors.response.use(
+      (config) => {
+        console.log('[全局]响应成功拦截')
+        return config
+      },
+      (err) => {
+        console.log('[全局]响应失败拦截')
+        return err
+      }
+    )
   }
   request(config: ZURequestConfig): void {
+    if (config.interceptors?.requestInterceptor) {
+      config = config.interceptors?.requestInterceptor(config)
+    }
     this.instance.request(config).then((res) => {
-      console.log(res)
+      if (config.interceptors?.responseInterceptor) {
+        res = config.interceptors?.responseInterceptor(res)
+      }
       return res
     })
   }
