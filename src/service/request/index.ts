@@ -1,4 +1,6 @@
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios'
+import { ElLoading } from 'element-plus/lib/components'
+import { LoadingInstance } from 'element-plus/lib/components/loading/src/loading'
 
 interface ZUinterceptors {
   requestInterceptor?: (res: AxiosRequestConfig) => AxiosRequestConfig
@@ -9,14 +11,19 @@ interface ZUinterceptors {
 
 interface ZURequestConfig extends AxiosRequestConfig {
   interceptors?: ZUinterceptors
+  showLoading?: boolean
 }
 
+const DEFAULT_LOADING = false
 export default class ZURequest {
   instance: AxiosInstance
   interceptors?: ZUinterceptors
+  showLoading: boolean
+  loading?: LoadingInstance
   constructor(config: ZURequestConfig) {
     this.instance = axios.create(config)
     this.interceptors = config.interceptors
+    this.showLoading = DEFAULT_LOADING
     this.instance.interceptors.request.use(
       this.interceptors?.requestInterceptor,
       this.interceptors?.requestInterceptorCatch
@@ -27,6 +34,13 @@ export default class ZURequest {
     )
     this.instance.interceptors.request.use(
       (config) => {
+        if (this.showLoading) {
+          this.loading = ElLoading.service({
+            lock: true,
+            text: '正在请求数据...',
+            background: 'rgba(0, 0, 0, 0.5)'
+          })
+        }
         console.log('[全局]请求成功拦截')
         return config
       },
@@ -44,6 +58,7 @@ export default class ZURequest {
         } else {
           console.log('请求成功')
         }
+        this.loading?.close()
         console.log('[全局]响应成功拦截')
         return config
       },
@@ -52,6 +67,7 @@ export default class ZURequest {
         if (err.response.status === 404) {
           console.log('404 Error')
         }
+        this.loading?.close()
         console.log('[全局]响应失败拦截')
         return err
       }
@@ -61,15 +77,19 @@ export default class ZURequest {
     if (config.interceptors?.requestInterceptor) {
       config = config.interceptors?.requestInterceptor(config)
     }
+    this.showLoading =
+      config.showLoading !== undefined ? config.showLoading : DEFAULT_LOADING
     this.instance
       .request(config)
       .then((res) => {
         if (config.interceptors?.responseInterceptor) {
           res = config.interceptors?.responseInterceptor(res)
         }
+        this.showLoading = DEFAULT_LOADING
         return res
       })
       .catch((err) => {
+        this.showLoading = DEFAULT_LOADING
         return err
       })
   }
