@@ -36,11 +36,22 @@ export default class ZURequest {
       }
     )
     this.instance.interceptors.response.use(
-      (config) => {
+      (res) => {
+        // 响应成功, 但是服务器返回错误码
+        const data = res.data
+        if (data.returnCode === '-1001') {
+          console.log('请求失败')
+        } else {
+          console.log('请求成功')
+        }
         console.log('[全局]响应成功拦截')
         return config
       },
       (err) => {
+        // 响应失败
+        if (err.response.status === 404) {
+          console.log('404 Error')
+        }
         console.log('[全局]响应失败拦截')
         return err
       }
@@ -50,11 +61,16 @@ export default class ZURequest {
     if (config.interceptors?.requestInterceptor) {
       config = config.interceptors?.requestInterceptor(config)
     }
-    this.instance.request(config).then((res) => {
-      if (config.interceptors?.responseInterceptor) {
-        res = config.interceptors?.responseInterceptor(res)
-      }
-      return res
-    })
+    this.instance
+      .request(config)
+      .then((res) => {
+        if (config.interceptors?.responseInterceptor) {
+          res = config.interceptors?.responseInterceptor(res)
+        }
+        return res
+      })
+      .catch((err) => {
+        return err
+      })
   }
 }

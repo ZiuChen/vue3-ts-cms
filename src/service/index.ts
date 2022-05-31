@@ -6,6 +6,10 @@ export default new zuRequest({
   timeout: TIME_OUT,
   interceptors: {
     requestInterceptor: (config) => {
+      const token = ''
+      if (token && config.headers) {
+        config.headers.Authorization = `Bearer ${token}`
+      }
       console.log('请求成功拦截')
       return config
     },
