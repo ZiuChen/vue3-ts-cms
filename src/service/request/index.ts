@@ -1,18 +1,7 @@
-import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios'
+import axios, { AxiosInstance } from 'axios'
 import { ElLoading } from 'element-plus/lib/components'
 import { LoadingInstance } from 'element-plus/lib/components/loading/src/loading'
-
-interface ZUinterceptors {
-  requestInterceptor?: (res: AxiosRequestConfig) => AxiosRequestConfig
-  requestInterceptorCatch?: (err: any) => any
-  responseInterceptor?: (res: AxiosResponse) => AxiosResponse
-  responseInterceptorCatch?: (err: any) => any
-}
-
-interface ZURequestConfig extends AxiosRequestConfig {
-  interceptors?: ZUinterceptors
-  showLoading?: boolean
-}
+import { ZUinterceptors, ZURequestConfig } from './type'
 
 const DEFAULT_LOADING = false
 export default class ZURequest {
