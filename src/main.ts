@@ -3,6 +3,8 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import registerApp from './global'
+import 'normalize.css'
+import './assets/css/index.less'
 import zuRequest from './service'
 
 const app = createApp(App).use(router).use(store)
