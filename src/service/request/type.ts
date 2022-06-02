@@ -1,13 +1,13 @@
 import { AxiosRequestConfig, AxiosResponse } from 'axios'
 
-export interface ZUinterceptors {
+export interface ZUinterceptors<T = AxiosResponse> {
   requestInterceptor?: (res: AxiosRequestConfig) => AxiosRequestConfig
   requestInterceptorCatch?: (err: any) => any
-  responseInterceptor?: (res: AxiosResponse) => AxiosResponse
+  responseInterceptor?: (res: T) => T
   responseInterceptorCatch?: (err: any) => any
 }
 
-export interface ZURequestConfig extends AxiosRequestConfig {
-  interceptors?: ZUinterceptors
+export interface ZURequestConfig<T = AxiosResponse> extends AxiosRequestConfig {
+  interceptors?: ZUinterceptors<T>
   showLoading?: boolean
 }

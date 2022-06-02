@@ -49,7 +49,7 @@ export default class ZURequest {
         }
         this.loading?.close()
         console.log('[全局]响应成功拦截')
-        return config
+        return data
       },
       (err) => {
         // 响应失败
@@ -62,24 +62,40 @@ export default class ZURequest {
       }
     )
   }
-  request(config: ZURequestConfig): void {
-    if (config.interceptors?.requestInterceptor) {
-      config = config.interceptors?.requestInterceptor(config)
-    }
-    this.showLoading =
-      config.showLoading !== undefined ? config.showLoading : DEFAULT_LOADING
-    this.instance
-      .request(config)
-      .then((res) => {
-        if (config.interceptors?.responseInterceptor) {
-          res = config.interceptors?.responseInterceptor(res)
-        }
-        this.showLoading = DEFAULT_LOADING
-        return res
-      })
-      .catch((err) => {
-        this.showLoading = DEFAULT_LOADING
-        return err
-      })
+  request<T>(config: ZURequestConfig<T>): Promise<T> {
+    return new Promise((resolve, reject) => {
+      if (config.interceptors?.requestInterceptor) {
+        config = config.interceptors?.requestInterceptor(config)
+      }
+      this.showLoading =
+        config.showLoading !== undefined ? config.showLoading : DEFAULT_LOADING
+      this.instance
+        .request<any, T>(config)
+        .then((res) => {
+          if (config.interceptors?.responseInterceptor) {
+            res = config.interceptors?.responseInterceptor(res)
+          }
+          this.showLoading = DEFAULT_LOADING
+          return res
+        })
+        .then((res) => resolve(res))
+        .catch((err) => {
+          this.showLoading = DEFAULT_LOADING
+          reject(err)
+          return err
+        })
+    })
+  }
+  get<T>(config: ZURequestConfig<T>): Promise<T> {
+    return this.request<T>({ ...config, method: 'GET' })
+  }
+  post<T>(config: ZURequestConfig<T>): Promise<T> {
+    return this.request<T>({ ...config, method: 'POST' })
+  }
+  delete<T>(config: ZURequestConfig<T>): Promise<T> {
+    return this.request<T>({ ...config, method: 'DELETE' })
+  }
+  patch<T>(config: ZURequestConfig<T>): Promise<T> {
+    return this.request<T>({ ...config, method: 'PATCH' })
   }
 }
