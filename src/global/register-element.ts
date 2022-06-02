@@ -2,9 +2,9 @@ declare function require(moduleName: string): void
 import type { App } from 'vue'
 import 'element-plus/theme-chalk/base.css'
 import 'element-plus/theme-chalk/el-loading.css'
-import { ElButton } from 'element-plus'
+import { ElButton, ElTabs, ElTabPane, ElIcon } from 'element-plus'
 
-const components = [ElButton]
+const components = [ElButton, ElTabs, ElTabPane, ElIcon]
 
 export default function registerElement(app: App): void {
   components.forEach((c) => {
@@ -15,5 +15,8 @@ export default function registerElement(app: App): void {
 }
 
 function transferCamel(camel: string): string {
-  return 'el-' + camel.toLocaleLowerCase().split('el')[1]
+  return camel
+    .replace(/([A-Z])/g, '-$1')
+    .toLowerCase()
+    .slice(1)
 }
