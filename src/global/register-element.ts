@@ -2,9 +2,29 @@ declare function require(moduleName: string): void
 import type { App } from 'vue'
 import 'element-plus/theme-chalk/base.css'
 import 'element-plus/theme-chalk/el-loading.css'
-import { ElButton, ElTabs, ElTabPane, ElIcon } from 'element-plus'
+import {
+  ElButton,
+  ElTabs,
+  ElTabPane,
+  ElIcon,
+  ElForm,
+  ElFormItem,
+  ElInput,
+  ElCheckbox,
+  ElLink
+} from 'element-plus'
 
-const components = [ElButton, ElTabs, ElTabPane, ElIcon]
+const components = [
+  ElButton,
+  ElTabs,
+  ElTabPane,
+  ElIcon,
+  ElForm,
+  ElFormItem,
+  ElInput,
+  ElCheckbox,
+  ElLink
+]
 
 export default function registerElement(app: App): void {
   components.forEach((c) => {
