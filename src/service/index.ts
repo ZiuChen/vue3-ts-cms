@@ -10,19 +10,19 @@ export default new zuRequest({
       if (token && config.headers) {
         config.headers.Authorization = `Bearer ${token}`
       }
-      console.log('请求成功拦截')
+      // console.log('请求成功拦截')
       return config
     },
     requestInterceptorCatch: (err) => {
-      console.log('请求失败拦截')
+      // console.log('请求失败拦截')
       return err
     },
     responseInterceptor: (config) => {
-      console.log('响应成功拦截')
+      // console.log('响应成功拦截')
       return config
     },
     responseInterceptorCatch: (err) => {
-      console.log('响应失败拦截')
+      // console.log('响应失败拦截')
       return err
     }
   }

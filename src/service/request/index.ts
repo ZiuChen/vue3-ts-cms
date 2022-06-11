@@ -30,11 +30,11 @@ export default class ZURequest {
             background: 'rgba(0, 0, 0, 0.5)'
           })
         }
-        console.log('[全局]请求成功拦截')
+        // console.log('[全局]请求成功拦截')
         return config
       },
       (err) => {
-        console.log('[全局]请求失败拦截')
+        // console.log('[全局]请求失败拦截')
         return err
       }
     )
@@ -43,12 +43,12 @@ export default class ZURequest {
         // 响应成功, 但是服务器返回错误码
         const data = res.data
         if (data.returnCode === '-1001') {
-          console.log('请求失败')
+          // console.log('请求失败')
         } else {
-          console.log('请求成功')
+          // console.log('请求成功')
         }
         this.loading?.close()
-        console.log('[全局]响应成功拦截')
+        // console.log('[全局]响应成功拦截')
         return data
       },
       (err) => {
@@ -57,7 +57,7 @@ export default class ZURequest {
           console.log('404 Error')
         }
         this.loading?.close()
-        console.log('[全局]响应失败拦截')
+        // console.log('[全局]响应失败拦截')
         return err
       }
     )
