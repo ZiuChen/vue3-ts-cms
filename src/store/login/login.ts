@@ -9,6 +9,14 @@ const loginModule: Module<ILoginState, IRootState> = {
       token: '',
       userInfo: {}
     }
+  },
+  actions: {
+    accountLoginAction({ commit }, payload) {
+      console.log(payload)
+    },
+    phoneLoginAction({ commit }, payload) {
+      console.log(payload)
+    }
   }
 }
 

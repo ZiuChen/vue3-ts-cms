@@ -16,18 +16,26 @@
 
 <script lang="ts">
 import { defineComponent, ref, reactive } from 'vue'
+import { useStore } from 'vuex'
 import { rules } from '../config/account-config'
 import { ElForm } from 'element-plus'
 
 export default defineComponent({
   setup() {
+    const store = useStore()
     const account = reactive({
       phone: '',
       code: ''
     })
     const formRef = ref<InstanceType<typeof ElForm>>()
     const loginAction = () => {
-      console.log('Phone Login')
+      formRef.value?.validate((valid) => {
+        if (valid) {
+          store.dispatch('login/phoneLoginAction', { ...account })
+        } else {
+          return
+        }
+      })
     }
     return {
       account,
