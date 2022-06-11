@@ -1,19 +1,23 @@
 <template>
   <div class="login-phone">
-    <el-form :model="account" :rules="rules">
+    <el-form :model="account" :rules="rules" ref="formRef">
       <el-form-item label="手机号" prop="phone">
         <el-input v-model="account.phone" />
       </el-form-item>
       <el-form-item label="验证码" prop="code">
-        <el-input v-model="account.code" />
+        <div class="form-item-code">
+          <el-input class="code-input" v-model="account.code" />
+          <el-button type="primary">获取验证码</el-button>
+        </div>
       </el-form-item>
     </el-form>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive } from 'vue'
+import { defineComponent, ref, reactive } from 'vue'
 import { rules } from '../config/account-config'
+import { ElForm } from 'element-plus'
 
 export default defineComponent({
   setup() {
@@ -21,12 +25,26 @@ export default defineComponent({
       phone: '',
       code: ''
     })
+    const formRef = ref<InstanceType<typeof ElForm>>()
+    const loginAction = () => {
+      console.log('Phone Login')
+    }
     return {
       account,
-      rules
+      formRef,
+      rules,
+      loginAction
     }
   }
 })
 </script>
 
-<style scoped></style>
+<style lang="less" scoped>
+.form-item-code {
+  display: flex;
+  justify-content: space-between;
+  .code-input {
+    width: 50%;
+  }
+}
+</style>
