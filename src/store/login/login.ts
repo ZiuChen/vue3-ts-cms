@@ -8,6 +8,7 @@ import {
   requestUserMenusByRoleId
 } from '@/service/login/login'
 import localCache from '@/utils/cache'
+import router from '@/router'
 
 const loginModule: Module<ILoginState, IRootState> = {
   namespaced: true,
@@ -46,9 +47,25 @@ const loginModule: Module<ILoginState, IRootState> = {
       const userMenus = userMenusResult.data
       commit('changeUserMenus', userMenus)
       localCache.setCache('userMenus', userMenus)
+      // 4. 跳转到首页
+      router.push('/main')
     },
-    phoneLoginAction({ commit }, payload) {
+    async phoneLoginAction({ commit }, payload) {
       console.log(payload)
+    },
+    loadLocalLogin({ commit }) {
+      const token = localCache.getCache('token')
+      const userInfo = localCache.getCache('userInfo')
+      const userMenus = localCache.getCache('userMenus')
+      if (token) {
+        commit('changeToken', token)
+      }
+      if (userInfo) {
+        commit('changeUserInfo', userInfo)
+      }
+      if (userMenus) {
+        commit('changeUserMenus', userMenus)
+      }
     }
   }
 }
