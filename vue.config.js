@@ -4,6 +4,17 @@ module.exports = {
   // // 配置方式1: Vue CLI 提供的属性
   // outputDir: './build',
   // publicPath: './', // 打包后使用相对路径读取资源
+  devServer: {
+    proxy: {
+      '^/api': {
+        target: 'http://localhost:9000',
+        pathRewrite: {
+          '^/api': ''
+        },
+        changeOrigin: true
+      }
+    }
+  },
   // // 配置方式2: 与webpack的属性完全一致，最后会进行合并
   // configureWebpack: {
   //   resolve: {
