@@ -9,7 +9,7 @@
             账号登录
           </span>
         </template>
-        <loginAccount />
+        <loginAccount ref="accountRef" />
       </el-tab-pane>
       <el-tab-pane>
         <template #label>
@@ -22,17 +22,17 @@
       </el-tab-pane>
     </el-tabs>
     <div class="account-control">
-      <el-checkbox>记住密码</el-checkbox>
+      <el-checkbox v-model="isKeepPassword">记住密码</el-checkbox>
       <el-link>忘记密码</el-link>
     </div>
     <div class="login-btn">
-      <el-button type="primary">立即登录</el-button>
+      <el-button type="primary" @click="handleLoginClick">立即登录</el-button>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, ref } from 'vue'
 import loginAccount from './login-account.vue'
 import loginPhone from './login-phone.vue'
 
@@ -42,7 +42,16 @@ export default defineComponent({
     loginPhone
   },
   setup() {
-    return {}
+    const isKeepPassword = ref(true)
+    const accountRef = ref<InstanceType<typeof loginAccount>>()
+    const handleLoginClick = () => {
+      accountRef.value?.loginAction()
+    }
+    return {
+      isKeepPassword,
+      accountRef,
+      handleLoginClick
+    }
   }
 })
 </script>
