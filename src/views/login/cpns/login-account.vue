@@ -15,17 +15,25 @@
 import { defineComponent, reactive, ref } from 'vue'
 import { ElForm } from 'element-plus'
 import { rules } from '../config/account-config'
+import localCache from '@/utils/cache'
 
 export default defineComponent({
   setup() {
     const account = reactive({
-      name: '',
-      password: ''
+      name: localCache.getCache('name') ?? '',
+      password: localCache.getCache('password') ?? ''
     })
     const formRef = ref<InstanceType<typeof ElForm>>()
-    const loginAction = () => {
+    const loginAction = (isKeepPassword: boolean) => {
       formRef.value?.validate((valid) => {
         if (valid) {
+          if (isKeepPassword) {
+            localCache.setCache('name', account.name)
+            localCache.setCache('password', account.password)
+          } else {
+            localCache.deleteCache('name')
+            localCache.deleteCache('password')
+          }
           console.log('account login')
         } else {
           return
