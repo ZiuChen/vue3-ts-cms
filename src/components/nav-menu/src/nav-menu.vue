@@ -16,7 +16,9 @@
         <template v-if="menu.type === 1">
           <el-sub-menu :index="menu.id.toString()">
             <template #title>
-              <el-icon><location /></el-icon>
+              <el-icon>
+                <component :is="menu.icon" />
+              </el-icon>
               <span>{{ menu.name }}</span>
             </template>
             <template v-for="subMenu of menu.children" :key="subMenu.id">
