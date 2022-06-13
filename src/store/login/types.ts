@@ -1,5 +1,7 @@
+import type { IUserInfoResult, IUserMenus } from '@/service/login/type'
+
 export interface ILoginState {
   token: string
-  userInfo: any
-  userMenus: any
+  userInfo: IUserInfoResult
+  userMenus: IUserMenus
 }

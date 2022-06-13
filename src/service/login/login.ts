@@ -1,4 +1,10 @@
-import { IAccount, IDataType, ILoginResult, IUserInfoResult } from './type'
+import {
+  IAccount,
+  IDataType,
+  ILoginResult,
+  IUserInfoResult,
+  IUserMenus
+} from './type'
 import zuRequest from '../index'
 
 enum LoginAPI {
@@ -21,7 +27,7 @@ export function requestUserInfoById(id: number) {
 }
 
 export function requestUserMenusByRoleId(id: number) {
-  return zuRequest.get<IDataType<any>>({
+  return zuRequest.get<IDataType<IUserMenus>>({
     url: LoginAPI.UserMenus + id + '/menu'
   })
 }

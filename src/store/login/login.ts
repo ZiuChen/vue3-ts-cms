@@ -1,7 +1,11 @@
 import { Module } from 'vuex'
 import type { IRootState } from '../types'
 import type { ILoginState } from './types'
-import type { IAccount } from '@/service/login/type'
+import type {
+  IAccount,
+  IUserInfoResult,
+  IUserMenus
+} from '@/service/login/type'
 import {
   accountLoginRequest,
   requestUserInfoById,
@@ -15,18 +19,18 @@ const loginModule: Module<ILoginState, IRootState> = {
   state() {
     return {
       token: '',
-      userInfo: {},
-      userMenus: []
+      userInfo: {} as IUserInfoResult,
+      userMenus: [] as unknown as IUserMenus
     }
   },
   mutations: {
     changeToken(state, token: string) {
       state.token = token
     },
-    changeUserInfo(state, userInfo: any) {
+    changeUserInfo(state, userInfo: IUserInfoResult) {
       state.userInfo = userInfo
     },
-    changeUserMenus(state, userMenus: any) {
+    changeUserMenus(state, userMenus: IUserMenus) {
       state.userMenus = userMenus
     }
   },

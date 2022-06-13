@@ -3,6 +3,11 @@ export interface IAccount {
   password: string
 }
 
+export interface IDataType<T = any> {
+  code: number
+  data: T
+}
+
 export interface ILoginResult {
   id: number
   name: string
@@ -38,7 +43,23 @@ export interface IUserInfoResult {
   department: Department
 }
 
-export interface IDataType<T = any> {
-  code: number
-  data: T
+export interface IUserMenus {
+  id: number
+  name: string
+  type: number
+  url: string
+  icon: string
+  sort: number
+  children: ISubMenu
+}
+;[]
+
+export interface ISubMenu {
+  id: number
+  url: string
+  name: string
+  sort: number
+  type: number
+  children: any
+  parentId: number
 }
