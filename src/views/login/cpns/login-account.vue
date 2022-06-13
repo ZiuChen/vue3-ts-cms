@@ -29,11 +29,10 @@ export default defineComponent({
     const loginAction = (isKeepPassword: boolean) => {
       formRef.value?.validate((valid) => {
         if (valid) {
+          localCache.setCache('name', account.name)
           if (isKeepPassword) {
-            localCache.setCache('name', account.name)
             localCache.setCache('password', account.password)
           } else {
-            localCache.deleteCache('name')
             localCache.deleteCache('password')
           }
           store.dispatch('login/accountLoginAction', { ...account })
