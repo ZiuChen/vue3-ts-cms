@@ -23,14 +23,20 @@
               <span>{{ menu.name }}</span>
             </template>
             <template v-for="subMenu of menu.children" :key="subMenu.id">
-              <el-menu-item :index="subMenu.id.toString()">
+              <el-menu-item
+                :index="subMenu.id.toString()"
+                @click="handleMenuClick(subMenu)"
+              >
                 {{ subMenu.name }}
               </el-menu-item>
             </template>
           </el-sub-menu>
         </template>
         <template v-else>
-          <el-menu-item :index="menu.id.toString()">
+          <el-menu-item
+            :index="menu.id.toString()"
+            @click="handleMenuClick(menu)"
+          >
             {{ menu.name }}
           </el-menu-item>
         </template>
@@ -40,17 +46,23 @@
 </template>
 
 <script>
-import { defineComponent, computed, ref } from 'vue'
+import { defineComponent, computed } from 'vue'
 import { useStore } from '@/store'
+import { useRouter } from 'vue-router'
 export default defineComponent({
   props: {
     collapse: Boolean
   },
   setup() {
     const store = useStore()
+    const router = useRouter()
     const userMenus = computed(() => store.state.login.userMenus)
+    const handleMenuClick = (menuItem) => {
+      router.push(menuItem.url)
+    }
     return {
-      userMenus
+      userMenus,
+      handleMenuClick
     }
   }
 })
