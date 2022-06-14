@@ -7,7 +7,7 @@ import registerApp from './global'
 import 'normalize.css'
 import './assets/css/index.less'
 
-const app = createApp(App).use(router).use(store)
+const app = createApp(App).use(store).use(registerApp)
 setupStore()
-app.use(registerApp)
+app.use(router)
 app.mount('#app')
