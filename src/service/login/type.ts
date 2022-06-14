@@ -43,18 +43,17 @@ export interface IUserInfoResult {
   department: Department
 }
 
-export interface IUserMenus {
+export type IUserMenus = {
   id: number
   name: string
   type: number
   url: string
   icon: string
   sort: number
-  children: ISubMenu
-}
-;[]
+  children: ISubMenus
+}[]
 
-export interface ISubMenu {
+export type ISubMenus = {
   id: number
   url: string
   name: string
@@ -62,4 +61,4 @@ export interface ISubMenu {
   type: number
   children: any
   parentId: number
-}
+}[]
