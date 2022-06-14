@@ -1,10 +1,7 @@
-import type {
-  IUserMenus,
-  ISubMenus,
-  IUserMenu,
-  ISubMenu
-} from '@/service/login/type'
+import type { IUserMenus, ISubMenus } from '@/service/login/type'
 import type { RouteRecordRaw } from 'vue-router'
+
+let firstMenu: any = null
 
 export function mapMenusToRoutes(userMenus: IUserMenus) {
   const loadRoutes: RouteRecordRaw[] = []
@@ -20,6 +17,7 @@ export function mapMenusToRoutes(userMenus: IUserMenus) {
       if (menu.type === 2) {
         const route = allRoutes.find((route) => route.path === menu.url)
         if (route) loadRoutes.push(route)
+        if (!firstMenu) firstMenu = menu
       } else {
         _recurseGetRoute(menu.children)
       }
@@ -45,3 +43,5 @@ export function pathMapToMenu(
     }
   }
 }
+
+export { firstMenu }
