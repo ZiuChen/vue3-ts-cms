@@ -20,7 +20,11 @@ import {
   ElMenu,
   ElMenuItemGroup,
   ElMenuItem,
-  ElResult
+  ElResult,
+  ElDropdown,
+  ElDropdownMenu,
+  ElDropdownItem,
+  ElAvatar
 } from 'element-plus'
 
 const components = [
@@ -41,7 +45,11 @@ const components = [
   ElSubMenu,
   ElMenuItemGroup,
   ElMenuItem,
-  ElResult
+  ElResult,
+  ElDropdown,
+  ElDropdownMenu,
+  ElDropdownItem,
+  ElAvatar
 ]
 
 export default function registerElement(app: App): void {
