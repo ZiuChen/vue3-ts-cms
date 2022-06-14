@@ -1,4 +1,9 @@
-import type { IUserMenus, ISubMenus } from '@/service/login/type'
+import type {
+  IUserMenus,
+  ISubMenus,
+  IUserMenu,
+  ISubMenu
+} from '@/service/login/type'
 import type { RouteRecordRaw } from 'vue-router'
 
 export function mapMenusToRoutes(userMenus: IUserMenus) {
@@ -22,4 +27,21 @@ export function mapMenusToRoutes(userMenus: IUserMenus) {
   }
   _recurseGetRoute(userMenus)
   return loadRoutes
+}
+
+export function pathMapToMenu(
+  userMenus: IUserMenus | ISubMenus,
+  currentPath: string
+): any {
+  // TODO: 此处用`forEach`遍历会报错 为什么?
+  for (const menu of userMenus) {
+    if (menu.type === 1) {
+      const targetMenu = pathMapToMenu(menu.children ?? [], currentPath)
+      if (targetMenu) {
+        return targetMenu
+      }
+    } else if (menu.type === 2 && menu.url === currentPath) {
+      return menu
+    }
+  }
 }
