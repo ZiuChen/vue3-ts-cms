@@ -27,15 +27,29 @@ export function mapMenusToRoutes(userMenus: IUserMenus) {
   return loadRoutes
 }
 
-export function pathMapToMenu(
+export function pathMapBreadcrumbs(
   userMenus: IUserMenus | ISubMenus,
   currentPath: string
+) {
+  const breadcrumbs: any[] = pathMapToMenu(userMenus, currentPath, true)
+  return breadcrumbs
+}
+
+export function pathMapToMenu(
+  userMenus: IUserMenus | ISubMenus,
+  currentPath: string,
+  isBreadcrumbs?: boolean
 ): any {
   // TODO: 此处用`forEach`遍历会报错 为什么?
   for (const menu of userMenus) {
     if (menu.type === 1) {
       const targetMenu = pathMapToMenu(menu.children ?? [], currentPath)
       if (targetMenu) {
+        if (isBreadcrumbs) {
+          const breadcrumbs: any[] = []
+          breadcrumbs.push(menu, targetMenu)
+          return breadcrumbs
+        }
         return targetMenu
       }
     } else if (menu.type === 2 && menu.url === currentPath) {

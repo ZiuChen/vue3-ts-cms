@@ -5,7 +5,7 @@
       <fold v-else />
     </el-icon>
     <div class="content">
-      <div>面包屑</div>
+      <BreadCrumb />
       <UserInfo />
     </div>
   </div>
@@ -14,9 +14,11 @@
 <script>
 import { ref } from 'vue'
 import UserInfo from './cpns/user-info.vue'
+import BreadCrumb from './cpns/bread-crumb.vue'
 export default {
   components: {
-    UserInfo
+    UserInfo,
+    BreadCrumb
   },
   setup(props, { emit }) {
     const isCollapse = ref(false)
