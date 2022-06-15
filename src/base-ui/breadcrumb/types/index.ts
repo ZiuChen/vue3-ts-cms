@@ -1,6 +1,6 @@
-export interface breadcrumb {
+export interface IBreadcrumb {
   name: string
-  path: string
+  path?: string
 }
 
-export type TBreadcrumbs = breadcrumb[]
+export type TBreadcrumbs = IBreadcrumb[]

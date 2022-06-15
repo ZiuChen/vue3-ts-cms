@@ -2,7 +2,7 @@
   <div class="bread-crumb">
     <el-breadcrumb :separator="separator">
       <template v-for="b of breadcrumb" :key="b.name">
-        <el-breadcrumb-item :to="{ path: b.path }" :replace="replace">{{
+        <el-breadcrumb-item v-bind="{ ...b }" :replace="replace">{{
           b.name
         }}</el-breadcrumb-item>
       </template>
@@ -16,7 +16,11 @@ import type { TBreadcrumbs } from '../types'
 
 export default defineComponent({
   props: {
-    breadcrumb: Array as PropType<TBreadcrumbs>,
+    breadcrumb: {
+      type: Array as PropType<TBreadcrumbs>,
+      default: () => [],
+      required: true
+    },
     separator: {
       type: String,
       default: '/',
