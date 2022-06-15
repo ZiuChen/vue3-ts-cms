@@ -57,7 +57,7 @@ const loginModule: Module<ILoginState, IRootState> = {
       // 4. 跳转到首页
       router.push('/main')
     },
-    async phoneLoginAction({ commit }, payload) {
+    async phoneLoginAction({}, payload) {
       console.log(payload)
     },
     loadLocalLogin({ commit }) {
