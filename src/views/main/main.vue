@@ -86,8 +86,6 @@ export default defineComponent({
 }
 
 .el-main {
-  color: #333;
   text-align: center;
-  background-color: #f0f2f5;
 }
 </style>
