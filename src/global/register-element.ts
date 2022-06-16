@@ -1,6 +1,7 @@
 declare function require(moduleName: string): void
 import type { App } from 'vue'
 import 'element-plus/theme-chalk/base.css'
+import 'element-plus/theme-chalk/dark/css-vars.css'
 import 'element-plus/theme-chalk/el-loading.css'
 import {
   ElButton,

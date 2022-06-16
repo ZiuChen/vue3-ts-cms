@@ -1,5 +1,6 @@
 <template>
   <div class="user-info">
+    <UserOptions />
     <el-avatar :size="30">
       <template #default>
         <el-icon><Avatar /></el-icon>
@@ -20,8 +21,12 @@
 </template>
 
 <script>
+import UserOptions from './user-options.vue'
 import { useStore } from 'vuex'
 export default {
+  components: {
+    UserOptions
+  },
   setup() {
     const store = useStore()
     const userInfo = store.state.login.userInfo
