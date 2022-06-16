@@ -14,13 +14,13 @@
 </template>
 
 <script lang="ts">
-import { ref } from 'vue'
+import { defineComponent, ref } from 'vue'
 import type { PropType } from 'vue'
 import ZUForm from '@/base-ui/form'
 import type { IFormConfig } from '@/base-ui/form/types'
 import type { IFormData } from '../types'
 
-export default {
+export default defineComponent({
   props: {
     searchFormConfig: {
       type: Object as PropType<IFormConfig>,
@@ -50,7 +50,7 @@ export default {
       search
     }
   }
-}
+})
 </script>
 
 <style lang="less" scoped>
