@@ -1,6 +1,6 @@
 <template>
   <div class="bread-crumb">
-    <ZUbreadcrumb :breadcrumb="breadcrumbs" :separator="'>'" />
+    <ZUBreadcrumb :breadcrumb="breadcrumbs" :separator="'>'" />
   </div>
 </template>
 
@@ -9,10 +9,10 @@ import { defineComponent, computed } from 'vue'
 import { useStore } from 'vuex'
 import { useRoute } from 'vue-router'
 import { pathMapBreadcrumbs } from '@/utils/map-menus'
-import ZUbreadcrumb, { TBreadcrumbs } from '@/base-ui/breadcrumb'
+import ZUBreadcrumb, { TBreadcrumbs } from '@/base-ui/breadcrumb'
 export default defineComponent({
   components: {
-    ZUbreadcrumb
+    ZUBreadcrumb
   },
   setup() {
     const store = useStore()

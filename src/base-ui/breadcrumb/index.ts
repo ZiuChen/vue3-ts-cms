@@ -1,5 +1,5 @@
-import ZUbreadcrumb from './src/breadcrumb.vue'
+import ZUBreadcrumb from './src/breadcrumb.vue'
 
 export * from './types'
 
-export default ZUbreadcrumb
+export default ZUBreadcrumb
