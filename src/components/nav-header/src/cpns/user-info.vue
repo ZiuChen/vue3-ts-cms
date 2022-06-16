@@ -10,8 +10,9 @@
       <span class="user-name">{{ userName }}</span>
       <template #dropdown>
         <el-dropdown-menu>
-          <el-dropdown-item>
-            <el-icon><CircleCloseFilled /></el-icon>
+          <el-dropdown-item icon="List">用户信息</el-dropdown-item>
+          <el-dropdown-item icon="Comment">消息设置</el-dropdown-item>
+          <el-dropdown-item icon="CircleCloseFilled" divided>
             退出系统
           </el-dropdown-item>
         </el-dropdown-menu>
