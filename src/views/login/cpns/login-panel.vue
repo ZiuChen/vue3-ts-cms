@@ -9,7 +9,7 @@
             账号登录
           </span>
         </template>
-        <loginAccount ref="accountRef" />
+        <loginAccount ref="accountRef" @login-trigger="handleLoginClick" />
       </el-tab-pane>
       <el-tab-pane name="phone">
         <template #label>

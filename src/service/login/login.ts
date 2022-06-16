@@ -16,18 +16,21 @@ enum LoginAPI {
 export function accountLoginRequest(account: IAccount) {
   return zuRequest.post<IDataType<ILoginResult>>({
     url: LoginAPI.AccountLogin,
-    data: account
+    data: account,
+    showLoading: true
   })
 }
 
 export function requestUserInfoById(id: number) {
   return zuRequest.get<IDataType<IUserInfoResult>>({
-    url: LoginAPI.LoginUserInfo + id
+    url: LoginAPI.LoginUserInfo + id,
+    showLoading: true
   })
 }
 
 export function requestUserMenusByRoleId(id: number) {
   return zuRequest.get<IDataType<IUserMenus>>({
-    url: LoginAPI.UserMenus + id + '/menu'
+    url: LoginAPI.UserMenus + id + '/menu',
+    showLoading: true
   })
 }

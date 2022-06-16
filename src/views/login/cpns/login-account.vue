@@ -5,7 +5,12 @@
         <el-input v-model="account.name" />
       </el-form-item>
       <el-form-item label="密码" prop="password">
-        <el-input v-model="account.password" />
+        <el-input
+          type="password"
+          v-model="account.password"
+          @keyup.enter="handleKeyUpEnter"
+          show-password
+        />
       </el-form-item>
     </el-form>
   </div>
@@ -19,7 +24,7 @@ import { rules } from '../config/account-config'
 import localCache from '@/utils/cache'
 
 export default defineComponent({
-  setup() {
+  setup(props, { emit }) {
     const store = useStore()
     const account = reactive({
       name: localCache.getCache('name') ?? '',
@@ -41,11 +46,13 @@ export default defineComponent({
         }
       })
     }
+    const handleKeyUpEnter = () => emit('LoginTrigger')
     return {
       account,
       rules,
       formRef,
-      loginAction
+      loginAction,
+      handleKeyUpEnter
     }
   }
 })
