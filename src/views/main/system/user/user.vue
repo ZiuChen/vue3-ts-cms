@@ -1,16 +1,23 @@
 <template>
   <div class="user">
-    <h2>user</h2>
+    <PageSearch :searchFormConfig="searchFormConfig" />
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import PageSearch from '@/components/page-search'
+import { searchFormConfig } from './config/search.config'
 
 export default defineComponent({
   name: 'user',
+  components: {
+    PageSearch
+  },
   setup() {
-    return {}
+    return {
+      searchFormConfig
+    }
   }
 })
 </script>
