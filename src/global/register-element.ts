@@ -26,7 +26,12 @@ import {
   ElDropdownItem,
   ElAvatar,
   ElBreadcrumb,
-  ElBreadcrumbItem
+  ElBreadcrumbItem,
+  ElRow,
+  ElCol,
+  ElSelect,
+  ElDatePicker,
+  ElOption
 } from 'element-plus'
 
 const components = [
@@ -38,6 +43,9 @@ const components = [
   ElFormItem,
   ElInput,
   ElCheckbox,
+  ElSelect,
+  ElOption,
+  ElDatePicker,
   ElLink,
   ElContainer,
   ElAside,
@@ -53,7 +61,9 @@ const components = [
   ElDropdownItem,
   ElAvatar,
   ElBreadcrumb,
-  ElBreadcrumbItem
+  ElBreadcrumbItem,
+  ElRow,
+  ElCol
 ]
 
 export default function registerElement(app: App): void {
