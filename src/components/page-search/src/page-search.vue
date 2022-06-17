@@ -10,7 +10,6 @@
       </div>
     </template>
   </ZUForm>
-  {{ formData }}
 </template>
 
 <script lang="ts">
