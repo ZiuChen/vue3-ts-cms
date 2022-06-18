@@ -1,6 +1,6 @@
-import {
+import type { IDataType } from '../types'
+import type {
   IAccount,
-  IDataType,
   ILoginResult,
   IUserInfoResult,
   IUserMenus
