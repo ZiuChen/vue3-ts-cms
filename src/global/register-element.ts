@@ -34,7 +34,8 @@ import {
   ElDatePicker,
   ElOption,
   ElTable,
-  ElTableColumn
+  ElTableColumn,
+  ElTag
 } from 'element-plus'
 
 const components = [
@@ -68,7 +69,8 @@ const components = [
   ElRow,
   ElCol,
   ElTable,
-  ElTableColumn
+  ElTableColumn,
+  ElTag
 ]
 
 export default function registerElement(app: App): void {

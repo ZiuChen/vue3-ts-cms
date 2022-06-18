@@ -2,7 +2,13 @@
   <div class="zu-table">
     <el-table :data="listData">
       <template v-for="item of propList" :key="item.prop">
-        <el-table-column v-bind="item"></el-table-column>
+        <el-table-column v-bind="item">
+          <template #default="scope">
+            <slot :name="item.slotName" :row="scope.row">
+              {{ scope.row[item.prop] }}
+            </slot>
+          </template>
+        </el-table-column>
       </template>
     </el-table>
   </div>
