@@ -3,13 +3,15 @@
     <PageSearch :searchFormConfig="searchFormConfig" />
     <ZUTable :listData="userList" :propList="propList">
       <template #status="scope">
-        <el-tag>{{ scope.row.enable ? '启用' : '停用' }}</el-tag>
+        <el-tag :type="scope.row.enable ? 'success' : 'danger'">{{
+          scope.row.enable ? '启用' : '停用'
+        }}</el-tag>
       </template>
       <template #createAt="scope">
-        <el-tag>{{ scope.row.createAt }}</el-tag>
+        <el-tag>{{ $filters.formatDate(scope.row.createAt) }}</el-tag>
       </template>
       <template #updateAt="scope">
-        <el-tag>{{ scope.row.updateAt }}</el-tag>
+        <el-tag>{{ $filters.formatDate(scope.row.updateAt) }}</el-tag>
       </template>
     </ZUTable>
   </div>
@@ -43,17 +45,17 @@ export default defineComponent({
       { prop: 'name', label: '用户名', minWidth: '100' },
       { prop: 'realname', label: '真实姓名', minWidth: '100' },
       { prop: 'cellphone', label: '手机号码', minWidth: '100' },
-      { prop: 'enable', label: '状态', minWidth: '100', slotName: 'status' },
+      { prop: 'enable', label: '状态', minWidth: '50', slotName: 'status' },
       {
         prop: 'createAt',
         label: '创建时间',
-        minWidth: '250',
+        minWidth: '150',
         slotName: 'createAt'
       },
       {
         prop: 'updateAt',
         label: '更新时间',
-        minWidth: '250',
+        minWidth: '150',
         slotName: 'updateAt'
       }
     ]
