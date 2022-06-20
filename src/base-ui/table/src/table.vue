@@ -3,7 +3,10 @@
     <div class="header">
       <slot name="header">
         <div class="title">
-          <h3>{{ title }}</h3>
+          <h2>{{ title }}</h2>
+        </div>
+        <div class="handler">
+          <slot name="headerHandler"></slot>
         </div>
       </slot>
     </div>
@@ -32,7 +35,20 @@
       </template>
     </el-table>
     <div class="footer">
-      <slot name="footer"></slot>
+      <slot name="footer">
+        <el-pagination
+          v-model:currentPage="currentPage4"
+          v-model:page-size="pageSize4"
+          :page-sizes="[100, 200, 300, 400]"
+          :small="small"
+          :disabled="disabled"
+          :background="background"
+          layout="total, sizes, prev, pager, next, jumper"
+          :total="400"
+          @size-change="handleSizeChange"
+          @current-change="handleCurrentChange"
+        />
+      </slot>
     </div>
   </div>
 </template>
@@ -80,5 +96,17 @@ export default defineComponent({
 <style scoped>
 .zu-table {
   padding: 20px;
+}
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+}
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 10px;
 }
 </style>
