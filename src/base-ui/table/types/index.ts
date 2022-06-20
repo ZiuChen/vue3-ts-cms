@@ -1,5 +1,5 @@
 export type IPropList = {
-  prop: string
+  prop?: string
   label: string
   minWidth: string | number
   slotName?: string
