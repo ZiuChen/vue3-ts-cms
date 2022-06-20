@@ -10,7 +10,11 @@ export type IUserList = {
   updateAt: string
 }[]
 
+export type IRoleList = {
+  [key: string]: any
+}[]
+
 export interface IListResult {
-  list: IUserList
+  list: IUserList | IRoleList
   totalCount: number
 }
