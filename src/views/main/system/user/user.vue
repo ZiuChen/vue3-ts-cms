@@ -1,7 +1,14 @@
 <template>
   <div class="user">
     <PageSearch :searchFormConfig="searchFormConfig" />
-    <ZUTable :listData="userList" :propList="propList">
+    <ZUTable
+      :title="'数据列表'"
+      :listData="userList"
+      :propList="propList"
+      :showIndexColumn="showIndexColumn"
+      :showSelectColumn="showSelectColumn"
+      @selectChange="handleSelectChange"
+    >
       <template #status="scope">
         <el-tag :type="scope.row.enable ? 'success' : 'danger'">{{
           scope.row.enable ? '启用' : '停用'
@@ -12,6 +19,10 @@
       </template>
       <template #updateAt="scope">
         <el-tag>{{ $filters.formatDate(scope.row.updateAt) }}</el-tag>
+      </template>
+      <template #handler>
+        <el-button icon="Edit" size="mini" type="text">编辑</el-button>
+        <el-button icon="Delete" size="mini" type="text">删除</el-button>
       </template>
     </ZUTable>
   </div>
@@ -49,21 +60,34 @@ export default defineComponent({
       {
         prop: 'createAt',
         label: '创建时间',
-        minWidth: '150',
+        minWidth: '100',
         slotName: 'createAt'
       },
       {
         prop: 'updateAt',
         label: '更新时间',
-        minWidth: '150',
+        minWidth: '100',
         slotName: 'updateAt'
+      },
+      {
+        label: '操作',
+        minWidth: '100',
+        slotName: 'handler'
       }
     ]
+    const showIndexColumn = true
+    const showSelectColumn = true
+    const handleSelectChange = (tableData: any) => {
+      console.log(tableData)
+    }
     return {
       searchFormConfig,
       userList,
       userCount,
-      propList
+      propList,
+      showIndexColumn,
+      showSelectColumn,
+      handleSelectChange
     }
   }
 })
