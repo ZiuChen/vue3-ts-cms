@@ -35,7 +35,9 @@ import {
   ElOption,
   ElTable,
   ElTableColumn,
-  ElTag
+  ElTag,
+  ElPagination,
+  ElConfigProvider
 } from 'element-plus'
 
 const components = [
@@ -70,7 +72,9 @@ const components = [
   ElCol,
   ElTable,
   ElTableColumn,
-  ElTag
+  ElTag,
+  ElPagination,
+  ElConfigProvider
 ]
 
 export default function registerElement(app: App): void {
