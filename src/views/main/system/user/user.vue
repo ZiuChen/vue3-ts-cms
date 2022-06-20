@@ -9,6 +9,9 @@
       :showSelectColumn="showSelectColumn"
       @selectChange="handleSelectChange"
     >
+      <template #headerHandler>
+        <el-button type="primary">新建用户</el-button>
+      </template>
       <template #status="scope">
         <el-tag :type="scope.row.enable ? 'success' : 'danger'">{{
           scope.row.enable ? '启用' : '停用'
@@ -21,8 +24,10 @@
         <el-tag>{{ $filters.formatDate(scope.row.updateAt) }}</el-tag>
       </template>
       <template #handler>
-        <el-button icon="Edit" size="mini" type="text">编辑</el-button>
-        <el-button icon="Delete" size="mini" type="text">删除</el-button>
+        <el-button icon="Edit" size="small" type="primary" link>编辑</el-button>
+        <el-button icon="Delete" size="small" type="primary" link
+          >删除</el-button
+        >
       </template>
     </ZUTable>
   </div>
