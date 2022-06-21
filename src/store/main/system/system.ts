@@ -19,6 +19,18 @@ const systemModule: Module<ISystemState, IRootState> = {
       roleCount: 0
     }
   },
+  getters: {
+    getListData(state) {
+      return (pageName: string) => {
+        switch (pageName) {
+          case 'user':
+            return state.userList
+          case 'role':
+            return state.roleList
+        }
+      }
+    }
+  },
   mutations: {
     changeUserList(state, userList: IUserList) {
       state.userList = userList
@@ -39,7 +51,6 @@ const systemModule: Module<ISystemState, IRootState> = {
       const pageUrl = PageMap[pageName]
       const { data } = await getPageListData(pageUrl, queryInfo)
       const { list, totalCount } = data
-      console.log(`change${upperInitialCharacter(pageName)}List`)
       commit(`change${upperInitialCharacter(pageName)}List`, list)
       commit(`change${upperInitialCharacter(pageName)}Count`, totalCount)
     }

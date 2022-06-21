@@ -1,11 +1,7 @@
 <template>
-  <ZUTable
-    :listData="userList"
-    v-bind="contentTableConfig"
-    @selectChange="handleSelectChange"
-  >
+  <ZUTable :listData="dataList" v-bind="contentTableConfig">
     <template #headerHandler>
-      <el-button type="primary">新建用户</el-button>
+      <el-button type="primary">新建</el-button>
     </template>
     <template #status="scope">
       <el-tag :type="scope.row.enable ? 'success' : 'danger'">{{
@@ -34,12 +30,12 @@ export default defineComponent({
     ZUTable
   },
   props: {
-    contentTableConfig: {
-      type: Object,
-      required: true
-    },
     pageName: {
       type: String,
+      required: true
+    },
+    contentTableConfig: {
+      type: Object,
       required: true
     }
   },
@@ -52,14 +48,12 @@ export default defineComponent({
         size: 10
       }
     })
-    const userList = computed(() => store.state.system.userList)
-    const userCount = computed(() => store.state.system.userCount)
-    const handleSelectChange = (tableData: any) => {
-      console.log(tableData)
-    }
+    const dataList = computed(() =>
+      store.getters['system/getListData'](props.pageName)
+    )
+    const dataCount = dataList.value.length
     return {
-      userList,
-      handleSelectChange
+      dataList
     }
   }
 })
