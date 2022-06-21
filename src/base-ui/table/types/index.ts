@@ -4,3 +4,8 @@ export type IPropList = {
   minWidth: string | number
   slotName?: string
 }[]
+
+export interface IPageInfo {
+  currentPage: number
+  pageSize: number
+}

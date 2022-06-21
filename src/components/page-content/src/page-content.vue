@@ -1,5 +1,9 @@
 <template>
-  <ZUTable :listData="dataList" v-bind="contentTableConfig">
+  <ZUTable
+    :listData="dataList"
+    v-bind="contentTableConfig"
+    v-model:page="pageInfo"
+  >
     <template #headerHandler>
       <el-button type="primary">新建</el-button>
     </template>
@@ -23,7 +27,7 @@
 
 <script lang="ts">
 import ZUTable from '@/base-ui/table'
-import { defineComponent, computed } from 'vue'
+import { defineComponent, ref, computed, watch } from 'vue'
 import { useStore } from '@/store'
 import type { TQueryInfo } from '@/store/main/system/types'
 export default defineComponent({
@@ -42,20 +46,30 @@ export default defineComponent({
   },
   setup(props) {
     const store = useStore()
+    const pageInfo = ref({
+      currentPage: 1,
+      pageSize: 25
+    })
+    watch(pageInfo, () => fetchTableData())
     const fetchTableData = (queryInfo: TQueryInfo = {}) => {
       store.dispatch('system/getPageListAction', {
         pageName: props.pageName,
-        queryInfo
+        queryInfo: {
+          offset: pageInfo.value.currentPage * pageInfo.value.pageSize,
+          size: pageInfo.value.pageSize,
+          ...queryInfo
+        }
       })
     }
     fetchTableData()
     const dataList = computed(() =>
       store.getters['system/getListData'](props.pageName)
     )
-    const dataCount = dataList.value.length
+    // const dataCount = dataList.value.length
     return {
       dataList,
-      fetchTableData
+      fetchTableData,
+      pageInfo
     }
   }
 })

@@ -15,7 +15,7 @@
         v-if="showSelectColumn"
         type="selection"
         align="center"
-        width="80"
+        width="50"
       ></el-table-column>
       <el-table-column
         v-if="showIndexColumn"
@@ -37,10 +37,14 @@
     <div class="footer">
       <slot name="footer">
         <el-pagination
-          :page-sizes="[100, 200, 300, 400]"
+          @size-change="handleSizeChange"
+          @current-change="handleCurrentChange"
+          :currentPage="page.currentPage"
+          :page-size="page.pageSize"
+          :page-sizes="[25, 50, 100]"
           small
           layout="total, sizes, prev, pager, next, jumper"
-          :total="400"
+          :total="listData.length"
         />
       </slot>
     </div>
@@ -50,7 +54,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import type { PropType } from 'vue'
-import type { IPropList } from '../types'
+import type { IPropList, IPageInfo } from '../types'
 
 export default defineComponent({
   props: {
@@ -73,15 +77,30 @@ export default defineComponent({
     showSelectColumn: {
       type: Boolean,
       default: false
+    },
+    page: {
+      type: Object as PropType<IPageInfo>,
+      default: () => ({
+        currentPage: 1,
+        pageSize: 25
+      })
     }
   },
-  emits: ['selectChange'],
+  emits: ['selectChange', 'update:page'],
   setup(props, { emit }) {
     const handleSelectChange = (tableData: any) => {
       emit('selectChange', tableData)
     }
+    const handleSizeChange = (pageSize: number) => {
+      emit('update:page', { ...props.page, pageSize })
+    }
+    const handleCurrentChange = (currentPage: number) => {
+      emit('update:page', { ...props.page, currentPage })
+    }
     return {
-      handleSelectChange
+      handleSelectChange,
+      handleSizeChange,
+      handleCurrentChange
     }
   }
 })

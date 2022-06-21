@@ -8,7 +8,7 @@ import type {
 import zuRequest from '../index'
 
 enum LoginAPI {
-  AccountLogin = '/Login',
+  AccountLogin = '/login',
   LoginUserInfo = '/users/',
   UserMenus = '/role/'
 }
