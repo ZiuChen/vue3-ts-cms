@@ -29,7 +29,8 @@ export default defineComponent({
   components: {
     ZUForm
   },
-  setup(props) {
+  emits: ['tableDataUpdate'],
+  setup(props, { emit }) {
     // TODO: 用reactive替换ref会导致: 数据变了但是template未变
     const formData = ref<IFormData>({})
     const formItems = ref(props.searchFormConfig?.formItems ?? [])
@@ -38,9 +39,12 @@ export default defineComponent({
         formData[field] = ''
       }
     }
-    const restore = () => mapFormItems(formData.value)
+    const restore = () => {
+      mapFormItems(formData.value)
+      emit('tableDataUpdate')
+    }
     const search = () => {
-      console.log('search')
+      emit('tableDataUpdate', formData.value)
     }
     mapFormItems(formData.value)
     return {

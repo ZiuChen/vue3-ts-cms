@@ -25,6 +25,7 @@
 import ZUTable from '@/base-ui/table'
 import { defineComponent, computed } from 'vue'
 import { useStore } from '@/store'
+import type { TQueryInfo } from '@/store/main/system/types'
 export default defineComponent({
   components: {
     ZUTable
@@ -41,19 +42,20 @@ export default defineComponent({
   },
   setup(props) {
     const store = useStore()
-    store.dispatch('system/getPageListAction', {
-      pageName: props.pageName,
-      queryInfo: {
-        offset: 0,
-        size: 10
-      }
-    })
+    const fetchTableData = (queryInfo: TQueryInfo = {}) => {
+      store.dispatch('system/getPageListAction', {
+        pageName: props.pageName,
+        queryInfo
+      })
+    }
+    fetchTableData()
     const dataList = computed(() =>
       store.getters['system/getListData'](props.pageName)
     )
     const dataCount = dataList.value.length
     return {
-      dataList
+      dataList,
+      fetchTableData
     }
   }
 })
