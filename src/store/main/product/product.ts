@@ -1,14 +1,9 @@
 import type { Module } from 'vuex'
-import type { IRootState } from '../../types'
+import type { IRootState } from '@/store/types'
 import type { IProductState } from './types'
 import type { IGoodItem } from './good/types'
-import type { IPayLoad } from '../system/types'
-import { getPageListData } from '@/service/main/system/system'
-import { upperInitialCharacter } from '@/utils/upper-initial-character'
+import { getPageListAction } from '@/hooks/getPageListAction'
 
-const PageMap: any = {
-  good: '/goods/list'
-}
 const productModule: Module<IProductState, IRootState> = {
   namespaced: true,
   state() {
@@ -44,16 +39,8 @@ const productModule: Module<IProductState, IRootState> = {
     }
   },
   actions: {
-    async getPageListAction({ commit }, payload: IPayLoad) {
-      const { pageName, queryInfo } = payload
-      const pageUrl = PageMap[pageName]
-      const { data } = await getPageListData(pageUrl, queryInfo)
-      const { list, totalCount } = data
-      // commit to mutations
-      commit(`change${upperInitialCharacter(pageName)}List`, list)
-      commit(`change${upperInitialCharacter(pageName)}Count`, totalCount)
-    }
-  }
+    getPageListAction
+  } as any
 }
 
 export default productModule

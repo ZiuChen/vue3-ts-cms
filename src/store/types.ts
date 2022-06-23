@@ -15,4 +15,13 @@ export type TQueryInfo = {
   [key: string]: any
 }
 
+export interface IPayLoad {
+  pageName: string
+  queryInfo: TQueryInfo
+}
+
+export interface IPageMap {
+  [key: string]: any
+}
+
 export type IStoreType = IRootState & IRootWithModule
