@@ -2,8 +2,20 @@ export const contentTableConfig = {
   title: '商品列表',
   propList: [
     { prop: 'name', label: '商品名称', minWidth: '100' },
-    { prop: 'oldPrice', label: '原价格', minWidth: '100' },
-    { prop: 'newPrice', label: '新价格', minWidth: '100' },
+    {
+      prop: 'oldPrice',
+      label: '原价格',
+      minWidth: '100',
+      slotName: 'oldPrice',
+      isPrivate: true
+    },
+    {
+      prop: 'newPrice',
+      label: '新价格',
+      minWidth: '100',
+      slotName: 'newPrice',
+      isPrivate: true
+    },
     { prop: 'desc', label: '商品描述', minWidth: '150' },
     {
       prop: 'status',

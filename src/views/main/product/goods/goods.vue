@@ -11,6 +11,8 @@
       :moduleName="'product'"
       :pageName="'good'"
     >
+      <template #oldPrice="scope"> $ {{ scope.row.oldPrice }} </template>
+      <template #newPrice="scope"> $ {{ scope.row.newPrice }} </template>
       <template #status="scope">
         <el-tag :type="scope.row.status ? 'success' : 'danger'">{{
           scope.row.status ? '启用' : '停用'
