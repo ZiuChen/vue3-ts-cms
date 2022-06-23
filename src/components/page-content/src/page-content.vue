@@ -9,8 +9,8 @@
       <el-button type="primary">新建</el-button>
     </template>
     <template #status="scope">
-      <el-tag :type="scope.row.enable ? 'success' : 'danger'">{{
-        scope.row.enable ? '启用' : '停用'
+      <el-tag :type="scope.row.status ? 'success' : 'danger'">{{
+        scope.row.status ? '启用' : '停用'
       }}</el-tag>
     </template>
     <template #createAt="scope">
@@ -18,6 +18,15 @@
     </template>
     <template #updateAt="scope">
       <el-tag>{{ $filters.formatDate(scope.row.updateAt) }}</el-tag>
+    </template>
+    <template
+      v-for="item of privateSlots"
+      :key="item.prop"
+      #[item.slotName]="scope"
+    >
+      <template v-if="item.slotName">
+        <slot :name="item.slotName" :row="scope.row"></slot>
+      </template>
     </template>
     <template #handler>
       <el-button icon="Edit" size="small" type="primary" link>编辑</el-button>
@@ -28,7 +37,7 @@
 
 <script lang="ts">
 import ZUTable from '@/base-ui/table'
-import { defineComponent } from 'vue'
+import { defineComponent, computed } from 'vue'
 import { fetchModuleListData } from '@/hooks/fetchModuleListData'
 export default defineComponent({
   components: {
@@ -51,11 +60,17 @@ export default defineComponent({
   setup(props) {
     const { dataList, dataTotalCount, fetchTableData, pageInfo } =
       fetchModuleListData(props.moduleName, props.pageName)
+    const privateSlots = computed(() =>
+      props.contentTableConfig.propList.filter(
+        (item: any) => item.isPrivate === true
+      )
+    )
     return {
       dataList,
       dataTotalCount,
       fetchTableData,
-      pageInfo
+      pageInfo,
+      privateSlots
     }
   }
 })
