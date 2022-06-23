@@ -1,6 +1,6 @@
 import { ref } from 'vue'
 import type PageContent from '@/components/page-content'
-import type { TQueryInfo } from '@/store/main/system/types'
+import type { TQueryInfo } from '@/store/types'
 
 export function usePageSearch() {
   const pageContentRef = ref<InstanceType<typeof PageContent>>()

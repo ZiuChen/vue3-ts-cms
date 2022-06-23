@@ -14,7 +14,11 @@ export type IRoleList = {
   [key: string]: any
 }[]
 
+export type IGoodList = {
+  [key: string]: any
+}[]
+
 export interface IListResult {
-  list: IUserList | IRoleList
+  list: IUserList | IRoleList | IGoodList
   totalCount: number
 }

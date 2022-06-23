@@ -1,14 +1,11 @@
 import type { IUserList, IRoleList } from '@/service/main/system/type'
+import type { TQueryInfo } from '@/store/types'
 
 export interface ISystemState {
   userList: IUserList
   userCount: number
   roleList: IRoleList
   roleCount: number
-}
-
-export type TQueryInfo = {
-  [key: string]: any
 }
 
 export interface IPayLoad {
