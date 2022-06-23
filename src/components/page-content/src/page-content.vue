@@ -1,6 +1,7 @@
 <template>
   <ZUTable
     :listData="dataList"
+    :listTotalCount="dataTotalCount"
     v-bind="contentTableConfig"
     v-model:page="pageInfo"
   >
@@ -27,7 +28,7 @@
 
 <script lang="ts">
 import ZUTable from '@/base-ui/table'
-import { defineComponent, ref, computed, watch } from 'vue'
+import { defineComponent, ref, computed, watchEffect } from 'vue'
 import { useStore } from '@/store'
 import type { TQueryInfo } from '@/store/main/system/types'
 export default defineComponent({
@@ -50,7 +51,6 @@ export default defineComponent({
       currentPage: 1,
       pageSize: 25
     })
-    watch(pageInfo, () => fetchTableData())
     const fetchTableData = (queryInfo: TQueryInfo = {}) => {
       store.dispatch('system/getPageListAction', {
         pageName: props.pageName,
@@ -61,13 +61,16 @@ export default defineComponent({
         }
       })
     }
-    fetchTableData()
+    watchEffect(() => fetchTableData())
     const dataList = computed(() =>
       store.getters['system/getListData'](props.pageName)
     )
-    // const dataCount = dataList.value.length
+    const dataTotalCount = computed(() =>
+      store.getters['system/getTotalCount'](props.pageName)
+    )
     return {
       dataList,
+      dataTotalCount,
       fetchTableData,
       pageInfo
     }

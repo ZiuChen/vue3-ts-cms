@@ -44,7 +44,7 @@
           :page-sizes="[25, 50, 100]"
           small
           layout="total, sizes, prev, pager, next, jumper"
-          :total="listData.length"
+          :total="listTotalCount"
         />
       </slot>
     </div>
@@ -64,6 +64,10 @@ export default defineComponent({
     },
     listData: {
       type: Array,
+      required: true
+    },
+    listTotalCount: {
+      type: Number,
       required: true
     },
     propList: {
