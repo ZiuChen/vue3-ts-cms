@@ -6,6 +6,7 @@
     />
     <PageContent
       ref="pageContentRef"
+      :moduleName="'system'"
       :pageName="'user'"
       :contentTableConfig="contentTableConfig"
     ></PageContent>
