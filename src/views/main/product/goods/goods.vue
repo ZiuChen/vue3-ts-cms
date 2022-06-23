@@ -1,6 +1,12 @@
 <template>
   <div class="goods">
+    <PageSearch
+      :searchFormConfig="searchFormConfig"
+      @tableDataUpdate="handleTableDataUpdate"
+    >
+    </PageSearch>
     <PageContent
+      ref="pageContentRef"
       :contentTableConfig="contentTableConfig"
       :moduleName="'product'"
       :pageName="'good'"
@@ -26,17 +32,25 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import PageSearch from '@/components/page-search'
 import PageContent from '@/components/page-content'
+import { searchFormConfig } from './config/search.config'
 import { contentTableConfig } from './config/content.config'
+import { usePageSearch } from '@/hooks/usePageSearch'
 
 export default defineComponent({
   name: 'goods',
   components: {
+    PageSearch,
     PageContent
   },
   setup() {
+    const [pageContentRef, handleTableDataUpdate] = usePageSearch()
     return {
-      contentTableConfig
+      searchFormConfig,
+      contentTableConfig,
+      pageContentRef,
+      handleTableDataUpdate
     }
   }
 })

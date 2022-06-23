@@ -5,23 +5,23 @@ export const searchFormConfig: IFormConfig = {
     {
       field: 'name',
       type: 'input',
-      label: '用户名',
-      placeholder: '请输入用户名'
+      label: '商品名',
+      placeholder: '请输入商品名'
     },
     {
-      field: 'realname',
+      field: 'desc',
       type: 'input',
-      label: '真实姓名',
-      placeholder: '请输入真实姓名'
+      label: '商品描述',
+      placeholder: '请输入商品描述'
     },
     {
-      field: 'cellphone',
+      field: 'address',
       type: 'input',
-      label: '手机号码',
-      placeholder: '请输入手机号码'
+      label: '地址',
+      placeholder: '请输入地址'
     },
     {
-      field: 'enable',
+      field: 'status',
       type: 'select',
       label: '状态',
       placeholder: '请选择状态',
