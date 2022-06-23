@@ -4,7 +4,13 @@
       :contentTableConfig="contentTableConfig"
       :moduleName="'product'"
       :pageName="'good'"
-    ></PageContent>
+    >
+      <template #status="scope">
+        <el-tag :type="scope.row.status ? 'success' : 'danger'">{{
+          scope.row.status ? '启用' : '停用'
+        }}</el-tag>
+      </template>
+    </PageContent>
   </div>
 </template>
 

@@ -9,7 +9,13 @@
       :moduleName="'system'"
       :pageName="'user'"
       :contentTableConfig="contentTableConfig"
-    ></PageContent>
+    >
+      <template #enable="scope">
+        <el-tag :type="scope.row.enable ? 'success' : 'danger'">{{
+          scope.row.enable ? '启用' : '停用'
+        }}</el-tag>
+      </template>
+    </PageContent>
   </div>
 </template>
 
