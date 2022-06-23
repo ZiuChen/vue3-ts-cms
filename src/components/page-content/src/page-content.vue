@@ -28,14 +28,17 @@
 
 <script lang="ts">
 import ZUTable from '@/base-ui/table'
-import { defineComponent, ref, computed, watchEffect } from 'vue'
-import { useStore } from '@/store'
-import type { TQueryInfo } from '@/store/main/system/types'
+import { defineComponent } from 'vue'
+import { fetchModuleListData } from '@/hooks/fetchModuleListData'
 export default defineComponent({
   components: {
     ZUTable
   },
   props: {
+    moduleName: {
+      type: String,
+      required: true
+    },
     pageName: {
       type: String,
       required: true
@@ -46,28 +49,8 @@ export default defineComponent({
     }
   },
   setup(props) {
-    const store = useStore()
-    const pageInfo = ref({
-      currentPage: 1,
-      pageSize: 25
-    })
-    const fetchTableData = (queryInfo: TQueryInfo = {}) => {
-      store.dispatch('system/getPageListAction', {
-        pageName: props.pageName,
-        queryInfo: {
-          offset: pageInfo.value.currentPage * pageInfo.value.pageSize,
-          size: pageInfo.value.pageSize,
-          ...queryInfo
-        }
-      })
-    }
-    watchEffect(() => fetchTableData())
-    const dataList = computed(() =>
-      store.getters['system/getListData'](props.pageName)
-    )
-    const dataTotalCount = computed(() =>
-      store.getters['system/getTotalCount'](props.pageName)
-    )
+    const { dataList, dataTotalCount, fetchTableData, pageInfo } =
+      fetchModuleListData(props.moduleName, props.pageName)
     return {
       dataList,
       dataTotalCount,
