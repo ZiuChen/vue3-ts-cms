@@ -8,13 +8,19 @@ export const contentTableConfig = {
     {
       prop: 'status',
       label: '状态',
-      minWidth: '100',
+      minWidth: '80',
       slotName: 'status'
     },
-    { prop: 'imgUrl', label: '图片', minWidth: '150', slotName: 'image' },
-    { prop: 'inventoryCount', label: '库存', minWidth: '100' },
-    { prop: 'saleCount', label: '销量', minWidth: '100' },
-    { prop: 'favorCount', label: '收藏量', minWidth: '100' },
+    {
+      prop: 'imgUrl',
+      label: '图片',
+      minWidth: '150',
+      slotName: 'imgUrl',
+      isPrivate: true
+    },
+    { prop: 'inventoryCount', label: '库存', minWidth: '80' },
+    { prop: 'saleCount', label: '销量', minWidth: '80' },
+    { prop: 'favorCount', label: '收藏量', minWidth: '80' },
     { prop: 'address', label: '地址', minWidth: '100' },
     {
       prop: 'createAt',

@@ -37,7 +37,9 @@ import {
   ElTableColumn,
   ElTag,
   ElPagination,
-  ElConfigProvider
+  ElConfigProvider,
+  ElImage,
+  ElImageViewer
 } from 'element-plus'
 
 const components = [
@@ -74,7 +76,9 @@ const components = [
   ElTableColumn,
   ElTag,
   ElPagination,
-  ElConfigProvider
+  ElConfigProvider,
+  ElImage,
+  ElImageViewer
 ]
 
 export default function registerElement(app: App): void {

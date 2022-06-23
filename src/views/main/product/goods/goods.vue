@@ -10,6 +10,16 @@
           scope.row.status ? '启用' : '停用'
         }}</el-tag>
       </template>
+      <template #imgUrl="scope">
+        <el-image
+          style="width: 60px; height: 60px"
+          :src="scope.row.imgUrl"
+          :lazy="true"
+          :preview-src-list="[scope.row.imgUrl]"
+          :preview-teleported="true"
+          :hide-on-click-modal="true"
+        ></el-image>
+      </template>
     </PageContent>
   </div>
 </template>
