@@ -46,6 +46,7 @@ export interface IUserMenu {
   icon: string
   sort: number
   children: ISubMenus
+  permission?: string
 }
 
 export interface ISubMenu {
@@ -56,6 +57,7 @@ export interface ISubMenu {
   type: number
   children: any
   parentId: number
+  permission?: string
 }
 
 export type IUserMenus = IUserMenu[]

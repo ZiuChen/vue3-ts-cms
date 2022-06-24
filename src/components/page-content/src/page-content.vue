@@ -6,7 +6,9 @@
     v-model:page="pageInfo"
   >
     <template #headerHandler>
-      <el-button type="primary">新建</el-button>
+      <el-button v-if="permissions.create" icon="CirclePlus" type="primary"
+        >新建</el-button
+      >
     </template>
     <template #status="scope">
       <el-tag :type="scope.row.status ? 'success' : 'danger'">{{
@@ -29,8 +31,22 @@
       </template>
     </template>
     <template #handler>
-      <el-button icon="Edit" size="small" type="primary" link>编辑</el-button>
-      <el-button icon="Delete" size="small" type="primary" link>删除</el-button>
+      <el-button
+        v-if="permissions.update"
+        icon="Edit"
+        size="small"
+        type="primary"
+        link
+        >编辑</el-button
+      >
+      <el-button
+        v-if="permissions.delete"
+        icon="Delete"
+        size="small"
+        type="primary"
+        link
+        >删除</el-button
+      >
     </template>
   </ZUTable>
 </template>
@@ -39,6 +55,7 @@
 import ZUTable from '@/base-ui/table'
 import { defineComponent, computed, PropType } from 'vue'
 import { fetchModuleListData } from '@/hooks/fetchModuleListData'
+import { usePermission } from '@/hooks/usePermission'
 import type { IContentConfig } from '@/components/page-content/types'
 export default defineComponent({
   components: {
@@ -59,6 +76,12 @@ export default defineComponent({
     }
   },
   setup(props) {
+    const permissions = {
+      create: usePermission(props.pageName, 'create'),
+      delete: usePermission(props.pageName, 'delete'),
+      update: usePermission(props.pageName, 'update'),
+      query: usePermission(props.pageName, 'query')
+    }
     const { dataList, dataTotalCount, fetchTableData, pageInfo } =
       fetchModuleListData(props.moduleName, props.pageName)
     const privateSlots = computed(() =>
@@ -71,7 +94,8 @@ export default defineComponent({
       dataTotalCount,
       fetchTableData,
       pageInfo,
-      privateSlots
+      privateSlots,
+      permissions
     }
   }
 })

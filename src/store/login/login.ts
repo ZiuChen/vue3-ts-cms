@@ -12,7 +12,7 @@ import {
   requestUserMenusByRoleId
 } from '@/service/login/login'
 import localCache from '@/utils/cache'
-import { mapMenusToRoutes } from '@/utils/map-menus'
+import { mapMenusToRoutes, mapMenusToPermissions } from '@/utils/map-menus'
 import router from '@/router'
 
 const loginModule: Module<ILoginState, IRootState> = {
@@ -21,7 +21,8 @@ const loginModule: Module<ILoginState, IRootState> = {
     return {
       token: '',
       userInfo: {} as IUserInfoResult,
-      userMenus: [] as unknown as IUserMenus
+      userMenus: [] as unknown as IUserMenus,
+      permissions: []
     }
   },
   mutations: {
@@ -35,6 +36,8 @@ const loginModule: Module<ILoginState, IRootState> = {
       state.userMenus = userMenus
       const dynamicRoutes = mapMenusToRoutes(userMenus)
       dynamicRoutes.forEach((route) => router.addRoute('main', route))
+      const permissions = mapMenusToPermissions(userMenus)
+      state.permissions = permissions
     }
   },
   actions: {

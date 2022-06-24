@@ -28,6 +28,21 @@ export function mapMenusToRoutes(userMenus: IUserMenus) {
   return loadRoutes
 }
 
+export function mapMenusToPermissions(userMenus: IUserMenus) {
+  const permissions: string[] = []
+  const _recurseGetPermission = (menus: IUserMenus | ISubMenus) => {
+    for (const m of menus) {
+      if (m.type === 1 || m.type === 2) {
+        _recurseGetPermission(m.children ?? [])
+      } else {
+        permissions.push(m.permission ?? '')
+      }
+    }
+  }
+  _recurseGetPermission(userMenus)
+  return permissions
+}
+
 export function pathMapBreadcrumbs(
   userMenus: IUserMenus | ISubMenus,
   currentPath: string
