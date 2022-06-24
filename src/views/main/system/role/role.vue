@@ -7,6 +7,7 @@
     <PageContent
       ref="pageContentRef"
       :pageName="'role'"
+      :moduleName="'system'"
       :contentTableConfig="contentTableConfig"
     ></PageContent>
   </div>
