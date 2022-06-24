@@ -10,7 +10,12 @@
         </div>
       </slot>
     </div>
-    <el-table :data="listData" border @selection-change="handleSelectChange">
+    <el-table
+      :data="listData"
+      border
+      @selection-change="handleSelectChange"
+      v-bind="childrenProps"
+    >
       <el-table-column
         v-if="showSelectColumn"
         type="selection"
@@ -54,7 +59,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import type { PropType } from 'vue'
-import type { TPropList, IPageInfo } from '../types'
+import type { TPropList, IPageInfo, IChildrenProps } from '../types'
 
 export default defineComponent({
   props: {
@@ -81,6 +86,10 @@ export default defineComponent({
     showSelectColumn: {
       type: Boolean,
       default: false
+    },
+    childrenProps: {
+      type: Object as PropType<IChildrenProps>,
+      default: () => ({})
     },
     page: {
       type: Object as PropType<IPageInfo>,

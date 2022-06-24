@@ -14,6 +14,10 @@ export type IRoleList = {
   [key: string]: any
 }[]
 
+export type IMenuList = {
+  [key: string]: any
+}[]
+
 export type IGoodList = {
   [key: string]: any
 }[]

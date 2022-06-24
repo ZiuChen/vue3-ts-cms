@@ -7,6 +7,7 @@ const PageMap: IPageMap = {
   /* system */
   user: '/users/list',
   role: '/role/list',
+  menu: '/menu/list',
   /* product */
   good: '/goods/list'
 }

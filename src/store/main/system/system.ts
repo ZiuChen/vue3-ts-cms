@@ -1,7 +1,11 @@
 import type { Module } from 'vuex'
 import type { ISystemState } from './types'
 import type { IRootState } from '@/store/types'
-import type { IUserList, IRoleList } from '@/service/main/system/type'
+import type {
+  IUserList,
+  IRoleList,
+  IMenuList
+} from '@/service/main/system/type'
 import { getPageListAction } from '@/hooks/getPageListAction'
 
 const systemModule: Module<ISystemState, IRootState> = {
@@ -11,7 +15,9 @@ const systemModule: Module<ISystemState, IRootState> = {
       userList: [],
       userCount: 0,
       roleList: [],
-      roleCount: 0
+      roleCount: 0,
+      menuList: [],
+      menuCount: 0
     }
   },
   getters: {
@@ -22,6 +28,8 @@ const systemModule: Module<ISystemState, IRootState> = {
             return state.userList
           case 'role':
             return state.roleList
+          case 'menu':
+            return state.menuList
         }
       }
     },
@@ -32,6 +40,8 @@ const systemModule: Module<ISystemState, IRootState> = {
             return state.userCount
           case 'role':
             return state.roleCount
+          case 'menu':
+            return state.menuCount
         }
       }
     }
@@ -48,6 +58,12 @@ const systemModule: Module<ISystemState, IRootState> = {
     },
     changeRoleCount(state, roleCount: number) {
       state.roleCount = roleCount
+    },
+    changeMenuList(state, menuList: IMenuList) {
+      state.menuList = menuList
+    },
+    changeMenuCount(state, menuCount: number) {
+      state.menuCount = menuCount
     }
   },
   actions: {

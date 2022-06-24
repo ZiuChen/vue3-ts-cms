@@ -12,3 +12,10 @@ export interface IPageInfo {
   currentPage: number
   pageSize: number
 }
+
+export interface IChildrenProps {
+  rowKey: string
+  treeProp: {
+    children: string
+  }
+}
