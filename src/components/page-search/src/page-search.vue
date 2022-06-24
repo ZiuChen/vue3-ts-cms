@@ -13,16 +13,15 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
-import type { PropType } from 'vue'
+import { defineComponent, ref, PropType } from 'vue'
 import ZUForm from '@/base-ui/form'
-import type { IFormConfig } from '@/base-ui/form/types'
+import { ISearchFormConfig } from '@/components/page-search/types'
 import type { IFormData } from '../types'
 
 export default defineComponent({
   props: {
     searchFormConfig: {
-      type: Object as PropType<IFormConfig>,
+      type: Object as PropType<ISearchFormConfig>,
       reuqired: true
     }
   },

@@ -1,6 +1,6 @@
-import { IFormConfig } from '@/base-ui/form'
+import { ISearchFormConfig } from '@/components/page-search/types'
 
-export const searchFormConfig: IFormConfig = {
+export const searchFormConfig: ISearchFormConfig = {
   formItems: [
     {
       field: 'name',
