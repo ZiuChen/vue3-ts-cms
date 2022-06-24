@@ -1,4 +1,6 @@
-export const contentTableConfig = {
+import type { IContentConfig } from '@/components/page-content/types'
+
+export const contentTableConfig: IContentConfig = {
   title: '用户列表',
   propList: [
     { prop: 'name', label: '用户名', minWidth: '100' },

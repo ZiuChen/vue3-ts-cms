@@ -37,8 +37,9 @@
 
 <script lang="ts">
 import ZUTable from '@/base-ui/table'
-import { defineComponent, computed } from 'vue'
+import { defineComponent, computed, PropType } from 'vue'
 import { fetchModuleListData } from '@/hooks/fetchModuleListData'
+import type { IContentConfig } from '@/components/page-content/types'
 export default defineComponent({
   components: {
     ZUTable
@@ -53,7 +54,7 @@ export default defineComponent({
       required: true
     },
     contentTableConfig: {
-      type: Object,
+      type: Object as PropType<IContentConfig>,
       required: true
     }
   },

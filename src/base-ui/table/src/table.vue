@@ -54,7 +54,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import type { PropType } from 'vue'
-import type { IPropList, IPageInfo } from '../types'
+import type { TPropList, IPageInfo } from '../types'
 
 export default defineComponent({
   props: {
@@ -71,7 +71,7 @@ export default defineComponent({
       required: true
     },
     propList: {
-      type: Array as PropType<IPropList>,
+      type: Array as PropType<TPropList>,
       required: true
     },
     showIndexColumn: {
