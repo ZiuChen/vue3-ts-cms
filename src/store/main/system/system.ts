@@ -6,7 +6,7 @@ import type {
   IRoleList,
   IMenuList
 } from '@/service/main/system/type'
-import { getPageListAction } from '@/hooks/getPageListAction'
+import { getPageListAction } from '@/store/actions/getPageListAction'
 import { deletePageData } from '@/service/main/system/system'
 
 const systemModule: Module<ISystemState, IRootState> = {

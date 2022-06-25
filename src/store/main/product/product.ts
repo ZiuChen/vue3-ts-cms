@@ -2,7 +2,7 @@ import type { Module } from 'vuex'
 import type { IRootState } from '@/store/types'
 import type { IProductState } from './types'
 import type { IGoodItem } from './good/types'
-import { getPageListAction } from '@/hooks/getPageListAction'
+import { getPageListAction } from '@/store/actions/getPageListAction'
 
 const productModule: Module<IProductState, IRootState> = {
   namespaced: true,
