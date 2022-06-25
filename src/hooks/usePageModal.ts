@@ -1,7 +1,9 @@
 import { ref } from 'vue'
 import PageModal from '@/components/page-modal'
 
-export function usePageModal() {
+type CallBackFn = () => void
+
+export function usePageModal(updateFn?: CallBackFn, createFn?: CallBackFn) {
   const pageModalRef = ref<InstanceType<typeof PageModal>>()
   const defaultInfo = ref({})
   const handleModalChange = (payload: undefined | any) => {
@@ -10,10 +12,12 @@ export function usePageModal() {
       /* update */
       pageModalRef.value.dialogVisible = true
       defaultInfo.value = { ...payload }
+      updateFn && updateFn()
     } else {
       /* create */
       pageModalRef.value.dialogVisible = true
       defaultInfo.value = {}
+      createFn && createFn()
     }
   }
   return [pageModalRef, defaultInfo, handleModalChange]
