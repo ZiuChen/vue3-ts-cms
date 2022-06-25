@@ -6,7 +6,11 @@
     v-model:page="pageInfo"
   >
     <template #headerHandler>
-      <el-button v-if="permissions.create" icon="CirclePlus" type="primary"
+      <el-button
+        v-if="permissions.create"
+        icon="CirclePlus"
+        type="primary"
+        @click="handleCreateClick"
         >新建</el-button
       >
     </template>
@@ -33,6 +37,7 @@
     <template #handler="scope">
       <el-button
         v-if="permissions.update"
+        @click="handleUpdateClick(scope.row)"
         icon="Edit"
         size="small"
         type="primary"
@@ -77,7 +82,8 @@ export default defineComponent({
       required: true
     }
   },
-  setup(props) {
+  emits: ['showModal'],
+  setup(props, { emit }) {
     const permissions = {
       create: usePermission(props.pageName, 'create'),
       delete: usePermission(props.pageName, 'delete'),
@@ -98,6 +104,12 @@ export default defineComponent({
         id: item.id
       })
     }
+    const handleCreateClick = () => {
+      emit('showModal')
+    }
+    const handleUpdateClick = (item: any) => {
+      emit('showModal', item)
+    }
     return {
       dataList,
       dataTotalCount,
@@ -105,7 +117,9 @@ export default defineComponent({
       pageInfo,
       privateSlots,
       permissions,
-      handleDeleteClick
+      handleDeleteClick,
+      handleCreateClick,
+      handleUpdateClick
     }
   }
 })

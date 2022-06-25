@@ -39,7 +39,9 @@ import {
   ElPagination,
   ElConfigProvider,
   ElImage,
-  ElImageViewer
+  ElImageViewer,
+  ElDialog,
+  ElOverlay
 } from 'element-plus'
 
 const components = [
@@ -78,7 +80,9 @@ const components = [
   ElPagination,
   ElConfigProvider,
   ElImage,
-  ElImageViewer
+  ElImageViewer,
+  ElDialog,
+  ElOverlay
 ]
 
 export default function registerElement(app: App): void {
