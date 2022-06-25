@@ -2,7 +2,7 @@ import { useStore } from 'vuex'
 import { ref, watchEffect, computed } from 'vue'
 import type { TQueryInfo } from '@/store/types'
 
-export const fetchModuleListData = (moduleName: string, pageName: string) => {
+export function useModuleListData(moduleName: string, pageName: string) {
   const store = useStore()
   const pageInfo = ref({
     currentPage: 1,
@@ -25,10 +25,5 @@ export const fetchModuleListData = (moduleName: string, pageName: string) => {
   const dataTotalCount = computed(() =>
     store.getters[moduleName + '/getTotalCount'](pageName)
   )
-  return {
-    fetchTableData,
-    dataList,
-    dataTotalCount,
-    pageInfo
-  }
+  return { fetchTableData, dataList, dataTotalCount, pageInfo }
 }

@@ -61,7 +61,7 @@
 import ZUTable from '@/base-ui/table'
 import { defineComponent, computed, PropType } from 'vue'
 import { useStore } from 'vuex'
-import { fetchModuleListData } from '@/hooks/fetchModuleListData'
+import { useModuleListData } from '@/hooks/useModuleListData'
 import { usePermission } from '@/hooks/usePermission'
 import type { IContentConfig } from '@/components/page-content/types'
 export default defineComponent({
@@ -90,8 +90,8 @@ export default defineComponent({
       update: usePermission(props.pageName, 'update'),
       query: usePermission(props.pageName, 'query')
     }
-    const { dataList, dataTotalCount, fetchTableData, pageInfo } =
-      fetchModuleListData(props.moduleName, props.pageName)
+    const { fetchTableData, dataList, dataTotalCount, pageInfo } =
+      useModuleListData(props.moduleName, props.pageName)
     const privateSlots = computed(() =>
       props.contentTableConfig.propList.filter(
         (item: any) => item.isPrivate === true
