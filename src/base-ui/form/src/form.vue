@@ -20,7 +20,7 @@
                   v-bind="item.otherOptions"
                   :show-password="item.type === 'password'"
                   :model-value="modelValue[`${item.field}`]"
-                  @update="handleValueChange"
+                  @update:modelValue="handleValueChange($event, item.field)"
                 />
               </template>
               <template v-else-if="item.type === 'select'">
@@ -29,7 +29,7 @@
                   v-bind="item.otherOptions"
                   style="width: 100%"
                   :model-value="modelValue[`${item.field}`]"
-                  @update="handleValueChange"
+                  @update:modelValue="handleValueChange($event, item.field)"
                 >
                   <el-option
                     v-for="option in item.options"
@@ -44,7 +44,7 @@
                   style="width: 100%"
                   v-bind="item.otherOptions"
                   :model-value="modelValue[`${item.field}`]"
-                  @update="handleValueChange"
+                  @update:modelValue="handleValueChange($event, item.field)"
                 ></el-date-picker>
               </template>
             </el-form-item>
