@@ -19,14 +19,15 @@
     </PageContent>
     <PageModal
       ref="pageModalRef"
-      :modalConfig="modalConfig"
+      :modalConfig="modalConfigRef"
       :defaultInfo="defaultInfo"
     ></PageModal>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, computed } from 'vue'
+import { useStore } from '@/store'
 import { searchFormConfig } from './config/search.config'
 import { contentTableConfig } from './config/content.config'
 import { modalConfig } from './config/modal.config'
@@ -57,6 +58,22 @@ export default defineComponent({
       ) as IFormItem
       passwordItem.isHidden = false
     }
+    const store = useStore()
+    const modalConfigRef = computed(() => {
+      const departmentItem = modalConfig.formItems.find(
+        (item) => item.field === 'departmentId'
+      ) as any
+      departmentItem.options = store.state.entireDepartment.map((item) => {
+        return { title: item.name, value: item.id }
+      })
+      const roleItem = modalConfig.formItems.find(
+        (item) => item.field === 'roleId'
+      ) as any
+      roleItem.options = store.state.entireRole.map((item) => {
+        return { title: item.name, value: item.id }
+      })
+      return modalConfig
+    })
     const [pageContentRef, handleTableDataUpdate] = usePageSearch()
     const [pageModalRef, defaultInfo, handleModalChange] = usePageModal(
       updateFn,
@@ -65,7 +82,7 @@ export default defineComponent({
     return {
       searchFormConfig,
       contentTableConfig,
-      modalConfig,
+      modalConfigRef,
       pageContentRef,
       handleTableDataUpdate,
       handleModalChange,
