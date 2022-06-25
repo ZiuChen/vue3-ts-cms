@@ -41,12 +41,14 @@ const loginModule: Module<ILoginState, IRootState> = {
     }
   },
   actions: {
-    async accountLoginAction({ commit }, payload: IAccount) {
+    async accountLoginAction({ commit, dispatch }, payload: IAccount) {
       // 1. 实现登录逻辑 保存token至store
       const loginResult = await accountLoginRequest(payload)
       const { id, token } = loginResult.data
       commit('changeToken', token)
       localCache.setCache('token', token)
+      // 初始化数据(role/department)
+      dispatch('getInitialDataAction', null, { root: true })
       // 2. 请求用户信息
       const userInfoResult = await requestUserInfoById(id)
       const userInfo = userInfoResult.data
@@ -63,12 +65,13 @@ const loginModule: Module<ILoginState, IRootState> = {
     async phoneLoginAction({}, payload) {
       console.log(payload)
     },
-    loadLocalLogin({ commit }) {
+    loadLocalLogin({ commit, dispatch }) {
       const token = localCache.getCache('token')
       const userInfo = localCache.getCache('userInfo')
       const userMenus = localCache.getCache('userMenus')
       if (token) {
         commit('changeToken', token)
+        dispatch('getInitialDataAction', null, { root: true })
       }
       if (userInfo) {
         commit('changeUserInfo', userInfo)
