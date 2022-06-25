@@ -39,13 +39,12 @@ export default defineComponent({
     }
   },
   setup(props) {
+    // @handleModalChange => defaultInfo => formData <=> modelValue(via emit)
     const dialogVisible = ref(false)
     const formData = ref<{ [key: string]: any }>({})
     watch(
       () => props.defaultInfo,
-      (newVal) => {
-        formData.value = { ...newVal }
-      }
+      (newVal) => (formData.value = { ...newVal })
     )
     return {
       dialogVisible,
