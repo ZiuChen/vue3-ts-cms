@@ -35,6 +35,7 @@ import PageContent from '@/components/page-content'
 import PageModal from '@/components/page-modal'
 import { usePageSearch } from '@/hooks/usePageSearch'
 import { usePageModal } from '@/hooks/usePageModal'
+import type { IFormItem } from '@/base-ui/form'
 
 export default defineComponent({
   name: 'user',
@@ -44,8 +45,23 @@ export default defineComponent({
     PageModal
   },
   setup() {
+    const updateFn = () => {
+      const passwordItem = modalConfig.formItems.find(
+        (item) => item.field === 'password'
+      ) as IFormItem
+      passwordItem.isHidden = true
+    }
+    const createFn = () => {
+      const passwordItem = modalConfig.formItems.find(
+        (item) => item.field === 'password'
+      ) as IFormItem
+      passwordItem.isHidden = false
+    }
     const [pageContentRef, handleTableDataUpdate] = usePageSearch()
-    const [pageModalRef, defaultInfo, handleModalChange] = usePageModal()
+    const [pageModalRef, defaultInfo, handleModalChange] = usePageModal(
+      updateFn,
+      createFn
+    )
     return {
       searchFormConfig,
       contentTableConfig,

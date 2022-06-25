@@ -6,6 +6,7 @@
       width="30%"
       center
       append-to-body
+      destroy-on-close
     >
       <ZUForm v-bind="modalConfig" v-model="formData"></ZUForm>
       <template #footer>
@@ -45,6 +46,16 @@ export default defineComponent({
     watch(
       () => props.defaultInfo,
       (newVal) => (formData.value = { ...newVal })
+    )
+    watch(
+      () => props.modalConfig,
+      (newVal) => {
+        console.log('modalConfig change')
+        console.log(newVal)
+      },
+      {
+        deep: true
+      }
     )
     return {
       dialogVisible,

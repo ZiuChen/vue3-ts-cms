@@ -20,6 +20,13 @@ export const modalConfig: IModalConfig = {
       placeholder: '请输入手机号码'
     },
     {
+      field: 'password',
+      type: 'input',
+      label: '密码',
+      placeholder: '请输入密码',
+      isHidden: true
+    },
+    {
       field: 'enable',
       type: 'select',
       label: '状态',
