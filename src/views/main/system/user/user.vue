@@ -9,6 +9,7 @@
       :moduleName="'system'"
       :pageName="'user'"
       :contentTableConfig="contentTableConfig"
+      @showModal="handleModalChange"
     >
       <template #enable="scope">
         <el-tag :type="scope.row.enable ? 'success' : 'danger'">{{
@@ -16,6 +17,11 @@
         }}</el-tag>
       </template>
     </PageContent>
+    <PageModal
+      ref="pageModalRef"
+      :modalConfig="modalConfig"
+      :defaultInfo="defaultInfo"
+    ></PageModal>
   </div>
 </template>
 
@@ -23,23 +29,32 @@
 import { defineComponent } from 'vue'
 import { searchFormConfig } from './config/search.config'
 import { contentTableConfig } from './config/content.config'
+import { modalConfig } from './config/modal.config'
 import PageSearch from '@/components/page-search'
 import PageContent from '@/components/page-content'
+import PageModal from '@/components/page-modal'
 import { usePageSearch } from '@/hooks/usePageSearch'
+import { usePageModal } from '@/hooks/usePageModal'
 
 export default defineComponent({
   name: 'user',
   components: {
     PageSearch,
-    PageContent
+    PageContent,
+    PageModal
   },
   setup() {
     const [pageContentRef, handleTableDataUpdate] = usePageSearch()
+    const [pageModalRef, defaultInfo, handleModalChange] = usePageModal()
     return {
       searchFormConfig,
       contentTableConfig,
+      modalConfig,
       pageContentRef,
-      handleTableDataUpdate
+      handleTableDataUpdate,
+      handleModalChange,
+      pageModalRef,
+      defaultInfo
     }
   }
 })
