@@ -7,6 +7,7 @@ import type {
   IMenuList
 } from '@/service/main/system/type'
 import { getPageListAction } from '@/hooks/getPageListAction'
+import { deletePageData } from '@/service/main/system/system'
 
 const systemModule: Module<ISystemState, IRootState> = {
   namespaced: true,
@@ -67,7 +68,19 @@ const systemModule: Module<ISystemState, IRootState> = {
     }
   },
   actions: {
-    getPageListAction
+    getPageListAction,
+    async deletePageDataAction({ dispatch }: any, payload: any) {
+      const { pageName, id } = payload
+      const pageUrl = `/${pageName}/${id}`
+      await deletePageData(pageUrl)
+      dispatch('getPageListAction', {
+        pageName,
+        queryInfo: {
+          offset: 0,
+          size: 25
+        }
+      })
+    }
   } as any
 }
 

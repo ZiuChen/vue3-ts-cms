@@ -30,7 +30,7 @@
         <slot :name="item.slotName" :row="scope.row"></slot>
       </template>
     </template>
-    <template #handler>
+    <template #handler="scope">
       <el-button
         v-if="permissions.update"
         icon="Edit"
@@ -41,6 +41,7 @@
       >
       <el-button
         v-if="permissions.delete"
+        @click="handleDeleteClick(scope.row)"
         icon="Delete"
         size="small"
         type="primary"
@@ -54,6 +55,7 @@
 <script lang="ts">
 import ZUTable from '@/base-ui/table'
 import { defineComponent, computed, PropType } from 'vue'
+import { useStore } from 'vuex'
 import { fetchModuleListData } from '@/hooks/fetchModuleListData'
 import { usePermission } from '@/hooks/usePermission'
 import type { IContentConfig } from '@/components/page-content/types'
@@ -89,13 +91,21 @@ export default defineComponent({
         (item: any) => item.isPrivate === true
       )
     )
+    const store = useStore()
+    const handleDeleteClick = (item: any) => {
+      store.dispatch('system/deletePageDataAction', {
+        pageName: props.pageName,
+        id: item.id
+      })
+    }
     return {
       dataList,
       dataTotalCount,
       fetchTableData,
       pageInfo,
       privateSlots,
-      permissions
+      permissions,
+      handleDeleteClick
     }
   }
 })

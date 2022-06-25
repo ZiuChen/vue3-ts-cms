@@ -9,7 +9,7 @@ import zuRequest from '../index'
 
 enum LoginAPI {
   AccountLogin = '/login',
-  LoginUserInfo = '/users/',
+  LoginUserInfo = '/user/',
   UserMenus = '/role/'
 }
 

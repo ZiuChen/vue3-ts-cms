@@ -9,3 +9,9 @@ export function getPageListData(url: string, queryInfo: any) {
     showLoading: true
   })
 }
+
+export function deletePageData(url: string) {
+  return ZURequest.delete<IDataType<any>>({
+    url
+  })
+}

@@ -5,11 +5,11 @@ import { upperInitialCharacter } from '@/utils/upper-initial-character'
 
 const PageMap: IPageMap = {
   /* system */
-  user: '/users/list',
+  user: '/user/list',
   role: '/role/list',
   menu: '/menu/list',
   /* product */
-  good: '/goods/list'
+  good: '/good/list'
 }
 
 export const getPageListAction = async (
