@@ -16,10 +16,10 @@ export function deletePageData(url: string) {
   })
 }
 
-export function createPageData(url: string, newData: any) {
+export function createPageData(url: string, createData: any) {
   return ZURequest.post<IDataType<any>>({
     url,
-    data: newData
+    data: createData
   })
 }
 
