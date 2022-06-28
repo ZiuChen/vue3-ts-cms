@@ -9,6 +9,7 @@
       destroy-on-close
     >
       <ZUForm v-bind="modalConfig" v-model="formData"></ZUForm>
+      <slot></slot>
       <template #footer>
         <span class="dialog-footer">
           <el-button @click="dialogVisible = false">Cancel</el-button>
@@ -39,6 +40,10 @@ export default defineComponent({
       type: Object,
       default: () => ({})
     },
+    otherInfo: {
+      type: Object,
+      default: () => ({})
+    },
     pageName: {
       type: String,
       required: true
@@ -60,14 +65,14 @@ export default defineComponent({
         // 编辑
         store.dispatch('system/updatePageDataAction', {
           pageName: props.pageName,
-          updateData: { ...formData.value },
+          updateData: { ...formData.value, ...props.otherInfo },
           id: props.defaultInfo.id
         })
       } else {
         // 新建
         store.dispatch('system/createPageDataAction', {
           pageName: props.pageName,
-          createData: { ...formData.value }
+          createData: { ...formData.value, ...props.otherInfo }
         })
       }
     }

@@ -71,4 +71,19 @@ export function pathMapToMenu(
   }
 }
 
+export function menuMapLeafKeys(menuList: IUserMenus | ISubMenus) {
+  const leftKeys: number[] = []
+  const _recurseGetLeaf = (menuList: IUserMenus | ISubMenus) => {
+    for (const menu of menuList) {
+      if (menu.children) {
+        _recurseGetLeaf(menu.children)
+      } else {
+        leftKeys.push(menu.id)
+      }
+    }
+  }
+  _recurseGetLeaf(menuList)
+  return leftKeys
+}
+
 export { firstMenu }

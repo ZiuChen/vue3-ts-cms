@@ -41,7 +41,8 @@ import {
   ElImage,
   ElImageViewer,
   ElDialog,
-  ElOverlay
+  ElOverlay,
+  ElTree
 } from 'element-plus'
 
 const components = [
@@ -82,7 +83,8 @@ const components = [
   ElImage,
   ElImageViewer,
   ElDialog,
-  ElOverlay
+  ElOverlay,
+  ElTree
 ]
 
 export default function registerElement(app: App): void {

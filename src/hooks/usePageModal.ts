@@ -1,7 +1,7 @@
 import { ref } from 'vue'
 import PageModal from '@/components/page-modal'
 
-type CallBackFn = () => void
+type CallBackFn = (payload?: any) => void
 
 export function usePageModal(updateFn?: CallBackFn, createFn?: CallBackFn) {
   const pageModalRef = ref<InstanceType<typeof PageModal>>()
@@ -12,7 +12,7 @@ export function usePageModal(updateFn?: CallBackFn, createFn?: CallBackFn) {
       /* update */
       pageModalRef.value.dialogVisible = true
       defaultInfo.value = { ...payload }
-      updateFn && updateFn()
+      updateFn && updateFn(payload)
     } else {
       /* create */
       pageModalRef.value.dialogVisible = true
