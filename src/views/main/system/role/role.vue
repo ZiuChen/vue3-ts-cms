@@ -9,7 +9,14 @@
       :pageName="'role'"
       :moduleName="'system'"
       :contentTableConfig="contentTableConfig"
+      @showModal="handleModalChange"
     ></PageContent>
+    <PageModal
+      ref="pageModalRef"
+      :defaultInfo="defaultInfo"
+      :modalConfig="modalConfig"
+      :pageName="'role'"
+    ></PageModal>
   </div>
 </template>
 
@@ -17,23 +24,32 @@
 import { defineComponent } from 'vue'
 import PageSearch from '@/components/page-search'
 import PageContent from '@/components/page-content'
+import PageModal from '@/components/page-modal'
 import { searchFormConfig } from './config/search.config'
 import { contentTableConfig } from './config/content.config'
+import { modalConfig } from './config/modal.config'
 import { usePageSearch } from '@/hooks/usePageSearch'
+import { usePageModal } from '@/hooks/usePageModal'
 
 export default defineComponent({
   name: 'role',
   components: {
     PageSearch,
-    PageContent
+    PageContent,
+    PageModal
   },
   setup() {
     const [pageContentRef, handleTableDataUpdate] = usePageSearch()
+    const [pageModalRef, defaultInfo, handleModalChange] = usePageModal()
     return {
       searchFormConfig,
       contentTableConfig,
+      modalConfig,
       pageContentRef,
-      handleTableDataUpdate
+      handleTableDataUpdate,
+      pageModalRef,
+      defaultInfo,
+      handleModalChange
     }
   }
 })
