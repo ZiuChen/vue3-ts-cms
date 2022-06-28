@@ -12,7 +12,7 @@
       <template #footer>
         <span class="dialog-footer">
           <el-button @click="dialogVisible = false">Cancel</el-button>
-          <el-button type="primary" @click="dialogVisible = false"
+          <el-button type="primary" @click="handleConfirmClick"
             >Confirm</el-button
           >
         </span>
@@ -25,6 +25,7 @@
 import { defineComponent, ref, watch, PropType } from 'vue'
 import ZUForm from '@/base-ui/form'
 import type { IModalConfig } from '@/components/page-modal/types'
+import { useStore } from 'vuex'
 export default defineComponent({
   components: {
     ZUForm
@@ -37,6 +38,10 @@ export default defineComponent({
     defaultInfo: {
       type: Object,
       default: () => ({})
+    },
+    pageName: {
+      type: String,
+      required: true
     }
   },
   setup(props) {
@@ -47,19 +52,30 @@ export default defineComponent({
       () => props.defaultInfo,
       (newVal) => (formData.value = { ...newVal })
     )
-    watch(
-      () => props.modalConfig,
-      (newVal) => {
-        console.log('modalConfig change')
-        console.log(newVal)
-      },
-      {
-        deep: true
+
+    const store = useStore()
+    const handleConfirmClick = () => {
+      dialogVisible.value = false
+      if (Object.keys(props.defaultInfo).length) {
+        // 编辑
+        store.dispatch('system/updatePageDataAction', {
+          pageName: props.pageName,
+          updateData: { ...formData.value },
+          id: props.defaultInfo.id
+        })
+      } else {
+        // 新建
+        store.dispatch('system/createPageDataAction', {
+          pageName: props.pageName,
+          createData: { ...formData.value }
+        })
       }
-    )
+    }
+
     return {
       dialogVisible,
-      formData
+      formData,
+      handleConfirmClick
     }
   }
 })

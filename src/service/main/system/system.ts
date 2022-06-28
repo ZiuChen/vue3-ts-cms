@@ -15,3 +15,17 @@ export function deletePageData(url: string) {
     url
   })
 }
+
+export function createPageData(url: string, newData: any) {
+  return ZURequest.post<IDataType<any>>({
+    url,
+    data: newData
+  })
+}
+
+export function updatePageData(url: string, updateData: any) {
+  return ZURequest.post<IDataType<any>>({
+    url,
+    data: updateData
+  })
+}
