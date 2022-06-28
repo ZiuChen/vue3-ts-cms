@@ -4,7 +4,8 @@ import type { IRootState } from '@/store/types'
 import type {
   IUserList,
   IRoleList,
-  IMenuList
+  IMenuList,
+  IDepartmentList
 } from '@/service/main/system/type'
 import { getPageListAction } from '@/store/actions/getPageListAction'
 import {
@@ -22,7 +23,9 @@ const systemModule: Module<ISystemState, IRootState> = {
       roleList: [],
       roleCount: 0,
       menuList: [],
-      menuCount: 0
+      menuCount: 0,
+      departmentList: [],
+      departmentCount: 0
     }
   },
   getters: {
@@ -35,6 +38,8 @@ const systemModule: Module<ISystemState, IRootState> = {
             return state.roleList
           case 'menu':
             return state.menuList
+          case 'department':
+            return state.departmentList
         }
       }
     },
@@ -47,6 +52,8 @@ const systemModule: Module<ISystemState, IRootState> = {
             return state.roleCount
           case 'menu':
             return state.menuCount
+          case 'department':
+            return state.departmentCount
         }
       }
     }
@@ -69,6 +76,12 @@ const systemModule: Module<ISystemState, IRootState> = {
     },
     changeMenuCount(state, menuCount: number) {
       state.menuCount = menuCount
+    },
+    changeDepartmentList(state, departmentList: IDepartmentList) {
+      state.departmentList = departmentList
+    },
+    changeDepartmentCount(state, departmentuCount: number) {
+      state.departmentCount = departmentuCount
     }
   },
   actions: {

@@ -1,7 +1,8 @@
 import type {
   IUserList,
   IRoleList,
-  IMenuList
+  IMenuList,
+  IDepartmentList
 } from '@/service/main/system/type'
 
 export interface ISystemState {
@@ -11,4 +12,6 @@ export interface ISystemState {
   roleCount: number
   menuList: IMenuList
   menuCount: number
+  departmentList: IDepartmentList
+  departmentCount: number
 }

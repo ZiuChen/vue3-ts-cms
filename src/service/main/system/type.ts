@@ -18,6 +18,10 @@ export type IMenuList = {
   [key: string]: any
 }[]
 
+export type IDepartmentList = {
+  [key: string]: any
+}[]
+
 export type IGoodList = {
   [key: string]: any
 }[]
