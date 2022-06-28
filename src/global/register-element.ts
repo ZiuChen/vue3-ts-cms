@@ -42,7 +42,11 @@ import {
   ElImageViewer,
   ElDialog,
   ElOverlay,
-  ElTree
+  ElTree,
+  ElCard,
+  ElDescriptions,
+  ElDescriptionsItem,
+  ElCheckTag
 } from 'element-plus'
 
 const components = [
@@ -84,7 +88,11 @@ const components = [
   ElImageViewer,
   ElDialog,
   ElOverlay,
-  ElTree
+  ElTree,
+  ElCard,
+  ElDescriptions,
+  ElDescriptionsItem,
+  ElCheckTag
 ]
 
 export default function registerElement(app: App): void {
