@@ -7,7 +7,7 @@ module.exports = {
   devServer: {
     proxy: {
       '^/api': {
-        target: 'http://localhost:9000',
+        target: 'https://mock.apifox.cn/m1/1122477-0-default',
         pathRewrite: {
           '^/api': ''
         },
