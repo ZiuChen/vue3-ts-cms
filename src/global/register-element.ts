@@ -46,7 +46,8 @@ import {
   ElCard,
   ElDescriptions,
   ElDescriptionsItem,
-  ElCheckTag
+  ElCheckTag,
+  ElTooltip
 } from 'element-plus'
 
 const components = [
@@ -92,7 +93,8 @@ const components = [
   ElCard,
   ElDescriptions,
   ElDescriptionsItem,
-  ElCheckTag
+  ElCheckTag,
+  ElTooltip
 ]
 
 export default function registerElement(app: App): void {
