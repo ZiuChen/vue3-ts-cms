@@ -1,25 +1,6 @@
 import type { DescriptionProp } from '@/base-ui/descriptions'
-export const devDependencies: DescriptionProp[] = [
-  { name: '@commitlint/cli', description: '^17.0.1' },
-  { name: '@commitlint/config-conventional', description: '^17.0.0' },
-  { name: '@typescript-eslint/eslint-plugin', description: '^4.18.0' },
-  { name: '@typescript-eslint/parser', description: '^4.18.0' },
-  { name: '@vue/cli-plugin-babel', description: '~4.5.13' },
-  { name: '@vue/cli-plugin-eslint', description: '~4.5.13' },
-  { name: '@vue/cli-plugin-typescript', description: '~4.5.13' },
-  { name: '@vue/cli-service', description: '~4.5.13' },
-  { name: '@vue/compiler-sfc', description: '^3.0.0' },
-  { name: '@vue/eslint-config-prettier', description: '^6.0.0' },
-  { name: '@vue/eslint-config-typescript', description: '^7.0.0' },
-  { name: 'commitizen', description: '^4.2.4' },
-  { name: 'cz-conventional-changelog', description: '^3.3.0' },
-  { name: 'eslint', description: '^6.7.2' },
-  { name: 'eslint-plugin-prettier', description: '^3.3.1' },
-  { name: 'eslint-plugin-vue', description: '^7.0.0' },
-  { name: 'highlight.js', description: '^11.5.1' },
-  { name: 'husky', description: '^8.0.0' },
-  { name: 'less', description: '^3.0.4' },
-  { name: 'less-loader', description: '^5.0.0' },
-  { name: 'prettier', description: '^2.6.2' },
-  { name: 'typescript', description: '~4.1.5' }
-]
+import { devDependencies as originDevDeps } from '@/../package.json'
+import { mapDependencies } from '@/utils/map-dependencies'
+
+const deps = mapDependencies(originDevDeps)
+export const devDependencies: DescriptionProp[] = deps
