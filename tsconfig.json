@@ -34,7 +34,9 @@
       "@/*": ["src/*"]
     },
     // 指定在项目中可以使用哪些库的类型 (Proxy / Window / Document)
-    "lib": ["esnext", "dom", "dom.iterable", "scripthost"]
+    "lib": ["esnext", "dom", "dom.iterable", "scripthost"],
+      // 解析json
+    "resolveJsonModule": true
   },
   // 哪些目录下的ts代码是需要用tsc解析的
   "include": [
